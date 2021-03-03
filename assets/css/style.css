@@ -1,0 +1,19 @@
+* {
+    
+}
+
+:root {
+    --color1: rgb(85, 155, 248);
+    --color2: rgb(73, 89, 175);
+    --color3: rgb(168, 168, 168);
+}
+
+header {
+    background-color: var(--color2);
+}
+
+.navbar a {
+    color: var(--color3);
+    font-size: 20px;
+    font-weight: bold;
+}
