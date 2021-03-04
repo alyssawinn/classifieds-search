@@ -4,16 +4,44 @@
 
 :root {
     --color1: rgb(85, 155, 248);
-    --color2: rgb(73, 89, 175);
-    --color3: rgb(168, 168, 168);
+    --color2: rgb(248, 150, 85);
+    --color3: rgb(219, 219, 219);
 }
 
 header {
-    background-color: var(--color2);
+    background-color: var(--color1);
+    padding-left: 20px;
+    border-bottom: solid 1px;
+
 }
 
 .navbar a {
     color: var(--color3);
     font-size: 20px;
+    font-weight: bold;
+}
+
+.color3 {
+    background-color: var(color3);
+}
+
+.search {
+    min-height: 100vh;
+    background-color: var(--color3);
+    padding: 10px;
+    border-right: solid 1px;
+
+}
+
+.results {
+    border-right: solid 1px;
+    min-height: 100vh;
+}
+
+button {
+    background-color: var(--color2);
+    padding: 10px;
+    border: solid 1px;
+    border-radius: 7px;
     font-weight: bold;
 }
