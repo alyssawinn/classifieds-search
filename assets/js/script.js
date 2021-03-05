@@ -5,7 +5,7 @@ $("#btn").click(function () {
   recentSearches.push(inputValue);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search").val("");
-  console.log(inputValue);
+  //console.log(inputValue);
 });
 
 $("#btn2").click(function () {
@@ -28,4 +28,3 @@ $(window).resize(function () {
     amznEl.classList.remove("small-6");
   }
 });
-
