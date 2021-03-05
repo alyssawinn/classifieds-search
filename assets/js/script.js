@@ -16,6 +16,17 @@ $("#btn2").click(function () {
   console.log(inputValue);
 });
 
+let searchAgain = recentSearches.map((r, i) => {
+  console.log(r, i);
+  return `
+  <div class="cell small-6" >
+    <div class="search-again" >
+      
+    </div>
+  </div>
+  `;
+});
+
 let ebayEl = document.querySelector("#ebayResults");
 let amznEl = document.querySelector("#amznResults");
 
