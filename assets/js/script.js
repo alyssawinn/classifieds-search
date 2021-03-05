@@ -8,6 +8,14 @@ $("#btn").click(function () {
   console.log(inputValue);
 });
 
+$("#btn2").click(function () {
+  let inputValue = $("#search2").val();
+  recentSearches.push(inputValue);
+  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+  $("#search2").val("");
+  console.log(inputValue);
+});
+
 let ebayEl = document.querySelector("#ebayResults");
 let amznEl = document.querySelector("#amznResults");
 
