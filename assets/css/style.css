@@ -15,18 +15,14 @@ header {
 
 }
 
-.navbar a {
-    color: var(--color3);
-    font-size: 20px;
+
+h4 {
+    background-color: var(--color3);
+    padding: 5px;
     font-weight: bold;
 }
 
-.color3 {
-    background-color: var(color3);
-}
-
 .search {
-    min-height: 100vh;
     background-color: var(--color3);
     padding: 10px;
     border-right: solid 1px;
@@ -40,8 +36,37 @@ header {
 
 button {
     background-color: var(--color2);
-    padding: 10px;
+    padding: 8px;
     border: solid 1px;
     border-radius: 7px;
     font-weight: bold;
+}
+
+.smallscreen {
+    display: none;
+}
+
+
+
+
+
+@media screen and (max-width: 810px) {
+    #instruction {
+        display: none;
+    }
+
+    .bigscreen {
+        display: none;
+    }
+
+    .smallscreen {
+        display: flex;
+    }
+
+    .search {
+        border-bottom: solid 2px;
+        padding-bottom: 30px;
+        text-align: center;
+    }
+
 }
