@@ -17,27 +17,56 @@
     <header class="grid-x grid-padding-x">
       <h1>Classifieds Search</h1>
     </header>
-
-    <main>
-      <div class="grid-x">
-        <div class="cell small-2">
-          <div class="row columns">
-            <label
-              >Keyword
-              <input id="search" type="text" name="keyword" placeholder="" />
-            </label>
-            <button id="btn" class="button cell">Submit</button>
-          </div>
+        
+    <section class="grid-x smallscreen">
+        <div class="cell small-6 search">
+            <div class="row columns ">
+                <p id="instruction">Search for items by keyword below and your results will be shown in the columns to the right.</p>
+                <label>Keyword
+                <input id="search" type="text" name="keyword" placeholder="Search by Keyword">
+                </label>
+                <button id="btn" class="cell">Search</button>
+            </div>
         </div>
 
-        <div class="large-4 column">Ebay search results</div>
+        <div class="cell small-6 search">
+                <h5>Favorited Items</h3>
+                <br>
+                <h5>Search for it again</h5>
+        </div>       
+    </section>
 
-        <div class="large-4 column">Craigslist search results</div>
+    <main>
 
-        <div class="large-2 column">
-          Favorited Items
-          <br />
-          Search for it again
+        <div class="grid-x">    
+            <div class="cell small-2 search bigscreen">
+                <div class="row columns ">
+                    <p id="instruction">Search for items by keyword below and your results will be shown in the columns to the right.</p>
+                    <label>Keyword
+                      <input id="search" type="text" name="keyword" placeholder="Search by Keyword">
+                    </label>
+                    <button id="btn" class="cell">Search</button>
+                  </div>
+                  <div class="smallscreen">
+                    <h5 class="">Favorited Items</h3>
+                    <br>
+                    <h5>Search for it again</h5>
+                </div>       
+            </div>
+
+            <div id="ebayResults" class="cell small-5 large-expand results">
+                <h4 class="color3">Ebay Search Results</h4>
+            </div>
+
+            <div id="amznResults" class="cell small-5 large-expand results">
+                <h4 class="color3">Amazon search results</h4>
+            </div>
+
+            <!-- <div class="history bigscreen">
+                <h5 class="color3">Favorited Items</h3>
+                <br>
+                <h5>Search for it again</h5>
+            </div> -->
         </div>
       </div>
     </main>
@@ -55,3 +84,4 @@
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
+
