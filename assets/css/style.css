@@ -1,6 +1,4 @@
-* {
-    
-}
+
 
 :root {
     --color1: rgb(85, 155, 248);
@@ -40,6 +38,28 @@ button {
     border: solid 1px;
     border-radius: 7px;
     font-weight: bold;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    margin: 15px;
+    min-height: 375px;
+    max-height: 375px;
+}
+
+.card-divider {
+    justify-content: center;
+    background-color: var(--color2);
+}
+
+.card-section {
+    background-color: var(--color1);
+}
+
+.item-price {
+    background-color: var(--color3);
+    border-radius: 5px;
 }
 
 .smallscreen {

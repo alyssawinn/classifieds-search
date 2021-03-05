@@ -28,3 +28,39 @@ $(window).resize(function () {
     amznEl.classList.remove("small-6");
   }
 });
+
+let createCard = function () {
+  // create card container element
+  let cardContainer = document.createElement("div");
+  cardContainer.classList.add("card");
+  cardContainer.setAttribute("style", "width: 200px");
+  // create card divider element
+  let cardDivider = document.createElement("div");
+  cardDivider.classList.add("card-divider");
+  cardDivider.textContent = "Item Name";
+  // create img element
+  let cardImage = document.createElement("img");
+  cardImage.classList.add("item-img");
+  cardImage.setAttribute("src", "assets/images/demo-img.webp");
+  // create card section element
+  let cardSection = document.createElement("div");
+  cardSection.classList.add("card-section");
+  // create item price element
+  let itemPrice = document.createElement("h4");
+  itemPrice.classList.add("item-price");
+  itemPrice.textContent = "$1000.00";
+  // create item description element
+  let itemDescription = document.createElement("p");
+  itemDescription.classList.add("item-description");
+  itemDescription.textContent =
+    "This is where we will add the description text. I wonder how it will look if the description is super long.";
+  // appending it all
+  ebayEl.appendChild(cardContainer);
+  cardContainer.appendChild(cardDivider);
+  cardContainer.appendChild(cardImage);
+  cardContainer.appendChild(cardSection);
+  cardSection.appendChild(itemPrice);
+  cardSection.appendChild(itemDescription);
+};
+
+createCard();
