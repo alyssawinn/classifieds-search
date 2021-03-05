@@ -1,4 +1,20 @@
+//80c1f1d7ee8675f3c19bec36ce542e41d1de0f9af08a453ccd5399bc3a1069bc
+
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
+
+
+let apiUrl = "https://serpapi.com/search.json?q=tv&tbm=shop&location=Dallas&hl=en&gl=us&api_key=80c1f1d7ee8675f3c19bec36ce542e41d1de0f9af08a453ccd5399bc3a1069bc"
+
+let getSearchResults = function(inputValue) {
+
+  fetch(apiUrl).then(function(response) {
+    if (response.ok) {
+      response.json().then(function(data) {
+        console.log(data);
+      });
+    }
+  });
+}
 
 $("#btn").click(function () {
   let inputValue = $("#search").val();
@@ -6,6 +22,7 @@ $("#btn").click(function () {
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search").val("");
   console.log(inputValue);
+  getSearchResults(inputValue);
 });
 
 $("#btn2").click(function () {
@@ -14,6 +31,8 @@ $("#btn2").click(function () {
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search2").val("");
   console.log(inputValue);
+  getSearchResults(inputValue);
+
 });
 
 let ebayEl = document.querySelector("#ebayResults");
