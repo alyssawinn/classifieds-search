@@ -44,6 +44,8 @@ button {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .4);
     margin: 15px;
+    min-height: 375px;
+    max-height: 375px;
 }
 
 .card-divider {
@@ -54,6 +56,12 @@ button {
 .card-section {
     background-color: var(--color1);
 }
+
+.item-price {
+    background-color: var(--color3);
+    border-radius: 5px;
+}
+
 .smallscreen {
     display: none;
 }
