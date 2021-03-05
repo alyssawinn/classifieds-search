@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>eBay & Craigslist Classifieds Search</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-<body>
-    <header class="grid-x grid-padding-x ">
-        <h1>Classifieds Search</h1>
-            
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+      integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <header class="grid-x grid-padding-x">
+      <h1>Classifieds Search</h1>
     </header>
         
     <section class="grid-x smallscreen">
@@ -19,9 +23,9 @@
             <div class="row columns ">
                 <p id="instruction">Search for items by keyword below and your results will be shown in the columns to the right.</p>
                 <label>Keyword
-                <input type="text" name="keyword" placeholder="Search by Keyword">
+                <input id="search" type="text" name="keyword" placeholder="Search by Keyword">
                 </label>
-                <button class="cell">Search</button>
+                <button id="btn" class="cell">Search</button>
             </div>
         </div>
 
@@ -33,14 +37,15 @@
     </section>
 
     <main>
+
         <div class="grid-x">    
             <div class="cell small-2 search bigscreen">
                 <div class="row columns ">
                     <p id="instruction">Search for items by keyword below and your results will be shown in the columns to the right.</p>
                     <label>Keyword
-                      <input type="text" name="keyword" placeholder="Search by Keyword">
+                      <input id="search" type="text" name="keyword" placeholder="Search by Keyword">
                     </label>
-                    <button class="cell">Search</button>
+                    <button id="btn" class="cell">Search</button>
                   </div>
                   <div class="smallscreen">
                     <h5 class="">Favorited Items</h3>
@@ -63,12 +68,20 @@
                 <h5>Search for it again</h5>
             </div> -->
         </div>
-
+      </div>
     </main>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
+      crossorigin="anonymous"
+    ></script>
     <script src="./assets/js/script.js"></script>
-</body>
+  </body>
 </html>
+
