@@ -20,8 +20,10 @@ let searchAgain = recentSearches.map((r, i) => {
   console.log(r, i);
   return `
   <div class="cell small-6" >
-    <div class="search-again" >
-      
+    <div class="search" >
+      <a href="" class="" >
+         
+      </a>
     </div>
   </div>
   `;
