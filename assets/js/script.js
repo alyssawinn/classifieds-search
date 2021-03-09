@@ -3,18 +3,20 @@
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 
 
-let apiUrl = "https://serpapi.com/search.json?q=tv&tbm=shop&location=Dallas&hl=en&gl=us&api_key=80c1f1d7ee8675f3c19bec36ce542e41d1de0f9af08a453ccd5399bc3a1069bc"
+const settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/90210?page=1",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "8206f3a213msh8ed8c8207eb19f8p1aede3jsn056a50d4f77f",
+		"x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com"
+	}
+};
 
-let getSearchResults = function(inputValue) {
-
-  fetch(apiUrl).then(function(response) {
-    if (response.ok) {
-      response.json().then(function(data) {
-        console.log(data);
-      });
-    }
-  });
-}
+$.ajax(settings).done(function (response) {
+	console.log(response.result.data[1]);
+});
 
 $("#btn").click(function () {
   let inputValue = $("#search").val();
