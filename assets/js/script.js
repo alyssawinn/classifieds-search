@@ -16,7 +16,7 @@ $("#btn").click(function () {
   recentSearches.unshift(inputValue);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search").val("");
-  //console.log(inputValue);
+  console.log(genre);
 });
 
 $("#btn2").click(function () {
@@ -33,8 +33,9 @@ let searchAgain = recentSearches.map((r, i) => {
     return "";
   } else {
     return `
-      <option id="option-${i}" >${r}</option>
+      <option id="option-${i}" >${r}</option> 
     `;
+    //change option id to something else.
   }
 });
 $("#searchedItems").html(searchAgain);
@@ -58,13 +59,13 @@ recentSearches.map((_, i) => {
 //  },
 //];
 
-myFavorites.map((favorite, i) => {
-  if (favorite.favorited) {
-    return `
-    <option></option>
-    `;
-  }
-});
+//myFavorites.map((favorite, i) => {
+// if (favorite.favorited) {
+//  return `
+//  <option></option>
+//  `;
+//  }
+//});
 
 let ebayEl = document.querySelector("#ebayResults");
 let amznEl = document.querySelector("#amznResults");
