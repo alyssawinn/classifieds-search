@@ -85,6 +85,17 @@ button:hover {
   margin: auto;
 }
 
+.restaurant-row {
+    max-height: 45px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 40%);
+    margin: 10px;
+    background-color: var(--color2);
+    padding: 10px;
+    color: white;
+    font-size: 18px;
+}
+
 .button2 {
   padding: 8px;
   font-size: 25px;
