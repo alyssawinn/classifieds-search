@@ -15,59 +15,165 @@
   </head>
   <body>
     <header class="grid-x grid-padding-x">
-      <h1>Classifieds Search</h1>
+      <h1>A Night In</h1>
     </header>
         
     <section class="grid-x smallscreen">
         <div class="cell small-6 search">
             <div class="row columns ">
-                <p id="instruction">Search for items by keyword below and your results will be shown in the columns to the right.</p>
-                <label>Zip-Code
-
-                <input id="search2" type="text" name="keyword" placeholder="Enter Your Zip-Code">
+              <p id="instruction">Help us plan your Night In!
+                <br>
+                Enter in your zipcode for a list of restaurants near you and fill out the form below to get
+                movie/T.V recommendations for tonight.
+              </p>
+              <label>Enter Zipcode
+                <input id="search" type="number" name="keyword" placeholder="zipcode">
+              </label>
+              
+            </div>
+            <div>
+                <label class="">Streaming Service
+                  <select id="streamingService">
+                    <option value="netflix">Netflix</option>
+                    <option value="disney">Disney+</option>
+                    <option value="hulu">Hulu</option>
+                    <option value="hbo">HBO</option>
+                    <option value="peacock">Peacock</option>
+                    <option value="prime">Amazon Prime</option>
+                  </select>
                 </label>
-                <button id="btn2" class="cell">Search</button>
             </div>
         </div>
 
         <div class="cell small-6 search">
-                <h5>Favorited Items</h3>
-                <br>
-                <h5>Search for it again</h5>
-        </div>       
+          <label class="">Genre
+            <select id="genre">
+              <option value="1">Biography</option>
+              <option value="2">Film Noir</option>
+              <option value="3">Game Show</option>
+              <option value="4">Musical</option>
+              <option value="5">Sport</option>
+              <option value="6">Short</option>
+              <option value="7">Adult</option>
+              <option value="12">Adventure</option>
+              <option value="14">Fantasy</option>
+              <option value="16">Animation</option>
+              <option value="18">Drama</option>
+              <option value="27">Horror</option>
+              <option value="28">Action</option>
+              <option value="35">Comedy</option>
+              <option value="36">History</option>
+              <option value="37">Western</option>
+              <option value="53">Thriller</option>
+              <option value="80">Crime</option>
+              <option value="99">Documentary</option>
+              <option value="878">Science Fiction</option>
+              <option value="9648">Mystery</option>
+              <option value="10402">Music</option>
+              <option value="10749">Romance</option>
+              <option value="10751">Family</option>
+              <option value="10752">War</option>
+              <option value="10763">News</option>
+              <option value="10764">Reality</option>
+              <option value="10767">Talk Show</option>
+            </select>
+          </label>
+          <label>Movie/TV
+            <select id="mediaType">
+              <option value="series">TV Show</option>
+              <option value="movie">Movie</option>
+            </select>
+          </label>
+        </div>    
+        <div class="smallbutton">
+          <button id="btn" class="button2 cell">Search</button>
+       </div>   
     </section>
 
     <main>
         <div class="grid-x">    
             <div class="cell small-2 search bigscreen">
                 <div class="row columns ">
-                    <p id="instruction">Search for items by keyword below and your results will be shown in the columns to the right.</p>
-                    <label>Keyword
-                      <input id="search" type="text" name="keyword" placeholder="Search by Keyword">
+                    <p id="instruction">Help us plan your Night In!
+                      <br>
+                      Enter in your zipcode for a list of restaurants near you and fill out the form below to get
+                      movie/T.V recommendations for tonight.
+                    </p>
+                    <label>Enter Zipcode
+                      <input id="search" type="number" name="keyword" placeholder="zipcode">
                     </label>
-                    <button id="btn" class="cell">Search</button>
+                    
                   </div>
-                  <div class="bigscreen">
-                    <h5 class="">Favorited Items</h3>
+                  <div  class="bigscreen">
+                    <h5>Favorited Items</h3>
                     <br>
-                    <h5>Search for it again</h5>
+                    <h4>Search</h4>
+                    <select name="" id="searchedItems" aria-placeholder="Search"></select>
+                  </div>       
+                  <div class="bigscreen">
+                      <label class="">Streaming Service
+                        <select id="streamingService">
+                          <option value="netflix">Netflix</option>
+                          <option value="disney">Disney+</option>
+                          <option value="hulu">Hulu</option>
+                          <option value="hbo">HBO</option>
+                          <option value="peacock">Peacock</option>
+                          <option value="prime">Amazon Prime</option>
+                        </select>
+                      </label>
+                    <label class="">Genre
+                      <select id="genre">
+                        <option value="1">Biography</option>
+                        <option value="2">Film Noir</option>
+                        <option value="3">Game Show</option>
+                        <option value="4">Musical</option>
+                        <option value="5">Sport</option>
+                        <option value="6">Short</option>
+                        <option value="7">Adult</option>
+                        <option value="12">Adventure</option>
+                        <option value="14">Fantasy</option>
+                        <option value="16">Animation</option>
+                        <option value="18">Drama</option>
+                        <option value="27">Horror</option>
+                        <option value="28">Action</option>
+                        <option value="35">Comedy</option>
+                        <option value="36">History</option>
+                        <option value="37">Western</option>
+                        <option value="53">Thriller</option>
+                        <option value="80">Crime</option>
+                        <option value="99">Documentary</option>
+                        <option value="878">Science Fiction</option>
+                        <option value="9648">Mystery</option>
+                        <option value="10402">Music</option>
+                        <option value="10749">Romance</option>
+                        <option value="10751">Family</option>
+                        <option value="10752">War</option>
+                        <option value="10763">News</option>
+                        <option value="10764">Reality</option>
+                        <option value="10767">Talk Show</option>
+                      </select>
+                    </label>
+                    <label>Movie/TV
+                      <select id="mediaType">
+                        <option value="series">TV Show</option>
+                        <option value="movie">Movie</option>
+                      </select>
+                    </label>
+
+                    <button id="btn" class="cell">Search</button>
                 </div>       
             </div>
 
             <div id="ebayResults" class="cell small-5 large-expand results">
-                <h4 class="color3">Ebay Search Results</h4>
+                <h4 class="color3">What to Watch</h4>
             </div>
 
             <div id="amznResults" class="cell small-5 large-expand results">
-                <h4 class="color3">Amazon search results</h4>
+                <h4 class="color3">Where to Eat</h4>
             </div>
 
 
-            <!-- <div class="history bigscreen">
-                <h5 class="color3">Favorited Items</h3>
-                <br>
-                <h5>Search for it again</h5>
-            </div> -->
+            
         </div>
       </div>
     </main>
@@ -86,3 +192,8 @@
   </body>
 </html>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
