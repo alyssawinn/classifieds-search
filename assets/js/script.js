@@ -1,15 +1,6 @@
-var pullCraigslistApi = function() {
-    var apiUrl = 'http://www.ksl.com/classifieds/api.php?cmd=ad&id=23027643';
-    fetch(apiUrl).then(function(response) {
-        if (response.ok) {
-            response.json().then(function(data) {
-                console.log(data.type);
-            })
-        }
-        
-    })
-}
+let genre = document.querySelector("#genre");
 
+$(document).foundation();
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 
 $("#btn").click(function () {
@@ -17,7 +8,7 @@ $("#btn").click(function () {
   recentSearches.push(inputValue);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search").val("");
-  console.log(inputValue);
+  console.log(genre);
 });
 
 $("#btn2").click(function () {
@@ -40,6 +31,9 @@ $(window).resize(function () {
     amznEl.classList.remove("small-6");
 }
   });
+
+  
+
 
   let createCard = function() {
       // create card container element
