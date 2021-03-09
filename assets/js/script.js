@@ -36,6 +36,25 @@ recentSearches.map((_, i) => {
     });
 });
 
+//let myFavorites = [
+// {
+// favorited: true,
+// name: "",
+//},
+//{
+// favorited: false,
+//  name: "",
+//  },
+//];
+
+myFavorites.map((favorite, i) => {
+  if (favorite.favorited) {
+    return `
+    <option></option>
+    `;
+  }
+});
+
 let ebayEl = document.querySelector("#ebayResults");
 let amznEl = document.querySelector("#amznResults");
 
