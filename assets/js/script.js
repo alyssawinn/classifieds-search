@@ -13,7 +13,7 @@ let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 
 $("#btn").click(function () {
   let inputValue = $("#search").val();
-  recentSearches.push(inputValue);
+  recentSearches.unshift(inputValue);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search").val("");
   //console.log(inputValue);
@@ -21,10 +21,49 @@ $("#btn").click(function () {
 
 $("#btn2").click(function () {
   let inputValue = $("#search2").val();
-  recentSearches.push(inputValue);
+  recentSearches.unshift(inputValue);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search2").val("");
   console.log(inputValue);
+});
+
+let searchAgain = recentSearches.map((r, i) => {
+  let isFiveSearches = i >= 5;
+  if (isFiveSearches) {
+    return "";
+  } else {
+    return `
+      <option id="option-${i}" >${r}</option>
+    `;
+  }
+});
+$("#searchedItems").html(searchAgain);
+
+recentSearches.map((_, i) => {
+  $(`#option-${i}`)
+    .off()
+    .click(() => {
+      // make api call
+    });
+});
+
+//let myFavorites = [
+// {
+// favorited: true,
+// name: "",
+//},
+//{
+// favorited: false,
+//  name: "",
+//  },
+//];
+
+myFavorites.map((favorite, i) => {
+  if (favorite.favorited) {
+    return `
+    <option></option>
+    `;
+  }
 });
 
 let ebayEl = document.querySelector("#ebayResults");
