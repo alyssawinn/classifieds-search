@@ -2,7 +2,7 @@ let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 
 $("#btn").click(function () {
   let inputValue = $("#search").val();
-  recentSearches.push(inputValue);
+  recentSearches.unshift(inputValue);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search").val("");
   //console.log(inputValue);
@@ -10,23 +10,30 @@ $("#btn").click(function () {
 
 $("#btn2").click(function () {
   let inputValue = $("#search2").val();
-  recentSearches.push(inputValue);
+  recentSearches.unshift(inputValue);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search2").val("");
   console.log(inputValue);
 });
 
 let searchAgain = recentSearches.map((r, i) => {
-  console.log(r, i);
-  return `
-  <div class="cell small-6" >
-    <div class="search" >
-      <a href="" class="" >
-         
-      </a>
-    </div>
-  </div>
-  `;
+  let isFiveSearches = i >= 5;
+  if (isFiveSearches) {
+    return "";
+  } else {
+    return `
+      <option id="option-${i}" >${r}</option>
+    `;
+  }
+});
+$("#searchedItems").html(searchAgain);
+
+recentSearches.map((_, i) => {
+  $(`#option-${i}`)
+    .off()
+    .click(() => {
+      // make api call
+    });
 });
 
 let ebayEl = document.querySelector("#ebayResults");

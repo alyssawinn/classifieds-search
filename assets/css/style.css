@@ -1,72 +1,63 @@
 * {
-    
 }
 
 :root {
-    --color1: rgb(85, 155, 248);
-    --color2: rgb(248, 150, 85);
-    --color3: rgb(219, 219, 219);
+  --color1: rgb(85, 155, 248);
+  --color2: rgb(248, 150, 85);
+  --color3: rgb(219, 219, 219);
 }
 
 header {
-    background-color: var(--color1);
-    padding-left: 20px;
-    border-bottom: solid 1px;
-
+  background-color: var(--color1);
+  padding-left: 20px;
+  border-bottom: solid 1px;
 }
 
-
 h4 {
-    background-color: var(--color3);
-    padding: 5px;
-    font-weight: bold;
+  background-color: var(--color3);
+  padding: 5px;
+  font-weight: bold;
 }
 
 .search {
-    background-color: var(--color3);
-    padding: 10px;
-    border-right: solid 1px;
-
+  background-color: var(--color3);
+  padding: 10px;
+  border-right: solid 1px;
 }
 
 .results {
-    border-right: solid 1px;
-    min-height: 100vh;
+  border-right: solid 1px;
+  min-height: 100vh;
 }
 
 button {
-    background-color: var(--color2);
-    padding: 8px;
-    border: solid 1px;
-    border-radius: 7px;
-    font-weight: bold;
+  background-color: var(--color2);
+  padding: 8px;
+  border: solid 1px;
+  border-radius: 7px;
+  font-weight: bold;
 }
 
 .smallscreen {
-    display: none;
+  display: none;
 }
 
-
-
-
-
 @media screen and (max-width: 827px) {
-    #instruction {
-        display: none;
-    }
+  #instruction {
+    display: none;
+  }
 
-    .bigscreen {
-        display: none;
-    }
+  .bigscreen {
+    display: none;
+  }
 
-    .smallscreen {
-        display: flex;
-    }
+  .smallscreen {
+    display: flex;
+  }
 
-    .search {
-        border-bottom: solid 2px;
-        padding-bottom: 30px;
-        text-align: center;
-    }
-
+  .search {
+    border-bottom: solid 2px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
 }
