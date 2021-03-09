@@ -1,72 +1,120 @@
 * {
-    
 }
 
 :root {
-    --color1: rgb(85, 155, 248);
-    --color2: rgb(248, 150, 85);
-    --color3: rgb(219, 219, 219);
+  --color1: rgb(0, 0, 0);
+  --color2: rgb(144, 0, 0);
+  --color3: rgb(72, 72, 72);
 }
 
 header {
-    background-color: var(--color1);
-    padding-left: 20px;
-    border-bottom: solid 1px;
-
+  background-color: var(--color2);
+  padding-left: 20px;
+  color: var(--color1);
 }
 
+label {
+  font-size: 18px;
+}
+
+#instruction {
+  font-weight: bold;
+  font-size: 16px;
+}
 
 h4 {
-    background-color: var(--color3);
-    padding: 5px;
-    font-weight: bold;
+  background-color: var(--color3);
+  padding: 5px;
+  font-weight: bold;
 }
 
 .search {
-    background-color: var(--color3);
-    padding: 10px;
-    border-right: solid 1px;
-
+  background-color: var(--color3);
+  padding: 10px;
+  border-right: solid 1px;
 }
 
 .results {
-    border-right: solid 1px;
-    min-height: 100vh;
+  border-right: solid 1px;
+  min-height: 100vh;
 }
 
 button {
-    background-color: var(--color2);
-    padding: 8px;
-    border: solid 1px;
-    border-radius: 7px;
-    font-weight: bold;
+  background-color: var(--color2);
+  padding: 8px;
+  border: solid 1px;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: rgb(189, 0, 0);
+  cursor: pointer;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  margin: 15px;
+  min-height: 375px;
+  max-height: 375px;
+}
+
+.card-divider {
+  justify-content: center;
+  background-color: var(--color2);
+}
+
+.card-section {
+  background-color: var(--color1);
+}
+
+.item-price {
+  background-color: var(--color3);
+  border-radius: 5px;
 }
 
 .smallscreen {
-    display: none;
+  display: none;
+  background-color: var(--color3);
+}
+.smallbutton {
+  justify-content: center;
+  display: flex;
+  width: 50%;
+  margin: auto;
 }
 
-
-
-
+.button2 {
+  padding: 8px;
+  font-size: 25px;
+}
 
 @media screen and (max-width: 827px) {
-    #instruction {
-        display: none;
-    }
+  #instruction {
+    display: none;
+  }
 
-    .bigscreen {
-        display: none;
-    }
+  .smallscreen {
+    display: flex;
+    border-bottom: solid;
+  }
 
-    .smallscreen {
-        display: flex;
-    }
+  .search {
+    text-align: center;
+    border-right: none;
+  }
 
-    .search {
-        border-bottom: solid 2px;
-        padding-bottom: 30px;
-        text-align: center;
-    }
+  .smallbutton {
+    margin-bottom: 20px;
+  }
 
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  header {
+    justify-content: center;
+  }
 }
