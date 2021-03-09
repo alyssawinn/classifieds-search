@@ -1,5 +1,23 @@
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 
+
+
+
+fetch("https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=netflix&type=movie&genre=18&page=1&language=en", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "27322ff4d2msheb5e58d7fc4eb03p11cb15jsnd5d27333e7d8",
+		"x-rapidapi-host": "streaming-availability.p.rapidapi.com"
+	}
+})
+.then(response => {
+	console.log(response);
+})
+.catch(err => {
+	console.error(err);
+});
+
+
 $("#btn").click(function () {
   let inputValue = $("#search").val();
   recentSearches.push(inputValue);
