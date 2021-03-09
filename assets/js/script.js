@@ -1,15 +1,3 @@
-var pullCraigslistApi = function() {
-    var apiUrl = 'http://www.ksl.com/classifieds/api.php?cmd=ad&id=23027643';
-    fetch(apiUrl).then(function(response) {
-        if (response.ok) {
-            response.json().then(function(data) {
-                console.log(data.type);
-            })
-        }
-        
-    })
-}
-
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 
 $("#btn").click(function () {
@@ -18,6 +6,7 @@ $("#btn").click(function () {
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search").val("");
   console.log(inputValue);
+  getRestaurantList();
 });
 
 $("#btn2").click(function () {
@@ -29,51 +18,79 @@ $("#btn2").click(function () {
 });
 
 let ebayEl = document.querySelector("#ebayResults");
-let amznEl = document.querySelector("#amznResults");
+let restaurantEl = document.querySelector("#restaurantResults");
+
+let createCard = function() {
+  // create card container element
+  let cardContainer = document.createElement("div");
+  cardContainer.classList.add("card");
+  cardContainer.setAttribute("style", "width: 200px")
+  // create card divider element
+  let cardDivider = document.createElement("div");
+  cardDivider.classList.add("card-divider");
+  cardDivider.textContent = "Item Name";
+  // create img element
+  let cardImage = document.createElement("img");
+  cardImage.classList.add("item-img");
+  cardImage.setAttribute("src", "assets/images/demo-img.webp");
+  // create card section element
+  let cardSection = document.createElement("div");
+  cardSection.classList.add("card-section");
+  // create item price element
+  let itemPrice = document.createElement("h4");
+  itemPrice.classList.add("item-price");
+  itemPrice.textContent = "$1000.00";
+  // create item description element
+  let itemDescription = document.createElement("p");
+  itemDescription.classList.add("item-description");
+  itemDescription.textContent = "This is where we will add the description text. I wonder how it will look if the description is super long."
+  // appending it all
+  ebayEl.appendChild(cardContainer);
+  cardContainer.appendChild(cardDivider);
+  cardContainer.appendChild(cardImage);
+  cardContainer.appendChild(cardSection);
+  cardSection.appendChild(itemPrice);
+  cardSection.appendChild(itemDescription);   
+};
+
+var getRestaurantList = function() {
+  fetch("https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/84095?page=1", {
+    "method": "GET",
+	  "headers": {
+		  "x-rapidapi-key": "8206f3a213msh8ed8c8207eb19f8p1aede3jsn056a50d4f77f",
+		  "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com"
+	  }
+  }).then(function(response) {
+    if(response.ok) {
+      response.json().then(function(data) {
+        console.log(data);
+        createRestaurantList(data.result);
+      })
+    }
+  })
+};
+
+
+var createRestaurantList = function(restaurants) {
+  var restaurantContainerEl = document.createElement("div");
+  for (var i = 0; i < restaurants.data.length; i++) {
+    var restaurantItem = document.createElement("div");
+    restaurantItem.classList = "restaurant-row";
+    restaurantItem.textContent = restaurants.data[i].restaurant_name + " - " + restaurants.data[i].restaurant_phone;
+    restaurantEl.appendChild(restaurantContainerEl);
+    restaurantContainerEl.appendChild(restaurantItem);
+  }
+};
 
 $(window).resize(function () {
   if ($(window).width() < 810) {
     ebayEl.classList.add("small-6");
-    amznEl.classList.add("small-6");
+    restaurantEl.classList.add("small-6");
   } else {
     ebayEl.classList.remove("small-6");
-    amznEl.classList.remove("small-6");
+    restaurantEl.classList.remove("small-6");
 }
   });
-
-  let createCard = function() {
-      // create card container element
-      let cardContainer = document.createElement("div");
-      cardContainer.classList.add("card");
-      cardContainer.setAttribute("style", "width: 200px")
-      // create card divider element
-      let cardDivider = document.createElement("div");
-      cardDivider.classList.add("card-divider");
-      cardDivider.textContent = "Item Name";
-      // create img element
-      let cardImage = document.createElement("img");
-      cardImage.classList.add("item-img");
-      cardImage.setAttribute("src", "assets/images/demo-img.webp");
-      // create card section element
-      let cardSection = document.createElement("div");
-      cardSection.classList.add("card-section");
-      // create item price element
-      let itemPrice = document.createElement("h4");
-      itemPrice.classList.add("item-price");
-      itemPrice.textContent = "$1000.00";
-      // create item description element
-      let itemDescription = document.createElement("p");
-      itemDescription.classList.add("item-description");
-      itemDescription.textContent = "This is where we will add the description text. I wonder how it will look if the description is super long."
-      // appending it all
-      ebayEl.appendChild(cardContainer);
-      cardContainer.appendChild(cardDivider);
-      cardContainer.appendChild(cardImage);
-      cardContainer.appendChild(cardSection);
-      cardSection.appendChild(itemPrice);
-      cardSection.appendChild(itemDescription);
-    
-};
 
 createCard();
 
