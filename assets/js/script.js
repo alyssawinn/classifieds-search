@@ -1,34 +1,23 @@
-var pullCraigslistApi = function() {
-    var apiUrl = 'http://www.ksl.com/classifieds/api.php?cmd=ad&id=23027643';
-    fetch(apiUrl).then(function(response) {
-        if (response.ok) {
-            response.json().then(function(data) {
-                console.log(data.type);
-            })
-        }
-        
-    })
-}
 
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 
 
-
-
-fetch("https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=netflix&type=movie&genre=18&page=1&language=en", {
+let getStreamingInfo = function(streamingService, mediaType, genreNumber) {
+fetch("https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=" + streamingService + "&type=" + mediaType + "&genre=" + genreNumber + "&page=1&language=en", {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "27322ff4d2msheb5e58d7fc4eb03p11cb15jsnd5d27333e7d8",
 		"x-rapidapi-host": "streaming-availability.p.rapidapi.com"
 	}
 })
-.then(response => {
-	console.log(response);
-})
-.catch(err => {
-	console.error(err);
+.then(function(responseGenre){
+	if (responseGenre.ok) {
+		responseGenre.json().then(function(dataGenre){
+			console.log(dataGenre)
+		})
+	}
 });
-
+}
 
 $("#btn").click(function () {
   let inputValue = $("#search").val();
@@ -93,5 +82,5 @@ $(window).resize(function () {
     
 };
 
-createCard();
+getStreamingInfo("netflix", "movie", 35);
 
