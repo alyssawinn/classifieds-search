@@ -17,7 +17,8 @@
     <header class="grid-x grid-padding-x">
       <h1>A Night In</h1>
     </header>
-        
+    
+    <!-- MOBILE/TABLET -->
     <section class="grid-x smallscreen">
         <div class="cell small-6 search">
             <div class="row columns ">
@@ -26,13 +27,13 @@
                 Enter in your zipcode for a list of restaurants near you and fill out the form below to get
                 movie/T.V recommendations for tonight.
               </p>
-              <label>Enter Zipcode
-                <input id="search" type="number" name="keyword" placeholder="zipcode">
-              </label>
-              
-            
-                <label class="">Streaming Service
+              <label>Zipcode</label>
+                <input id="zipcode" type="text" name="zipcode" placeholder="Zip Code" />
+            </div>
+            <div>
+                <label class="">Streaming Service</label>
                   <select id="streamingService">
+                    <option value="" disabled selected hidden>Streaming Service</option>
                     <option value="netflix">Netflix</option>
                     <option value="disney">Disney+</option>
                     <option value="hulu">Hulu</option>
@@ -40,13 +41,13 @@
                     <option value="peacock">Peacock</option>
                     <option value="prime">Amazon Prime</option>
                   </select>
-                </label>
             </div>
         </div>
 
         <div class="cell small-6 search">
-          <label class="">Genre
+          <label class="">Genre</label>
             <select id="genre">
+              <option value="" disabled selected hidden>Genre</option>
               <option value="1">Biography</option>
               <option value="2">Film Noir</option>
               <option value="3">Game Show</option>
@@ -76,19 +77,19 @@
               <option value="10764">Reality</option>
               <option value="10767">Talk Show</option>
             </select>
-          </label>
-          <label>Movie/TV
+          <label>Movie/TV</label>
             <select id="mediaType">
+              <option value="" disabled selected hidden>Show Type</option>
               <option value="series">TV Show</option>
               <option value="movie">Movie</option>
             </select>
-          </label>
         </div>    
         <div class="smallbutton">
           <button id="btn" class="button2 cell">Search</button>
        </div>   
     </section>
 
+    <!-- DESKTOP -->
     <main>
         <div class="grid-x">    
             <div class="cell small-2 bigscreen search ">
@@ -98,20 +99,14 @@
                       Enter in your zipcode for a list of restaurants near you and fill out the form below to get
                       movie/T.V recommendations for tonight.
                     </p>
-                    <label>Enter Zipcode
-                      <input id="search" type="number" name="keyword" placeholder="zipcode">
-                    </label>
+                    <label>Enter Zipcode</label>
+                      <input id="zipcode" type="text" name="keyword" placeholder="Zip Code">
                     
-                  </div>
-                  <div  class="">
-                    <h5>Favorited Items</h3>
-                    <br>
-                    <h4>Search</h4>
-                    <select name="" id="searchedItems" aria-placeholder="Search"></select>
                   </div>       
-                  <div class="">
-                      <label class="">Streaming Service
+                  <div class="bigscreen">
+                      <label class="">Streaming Service</label>
                         <select id="streamingService">
+                          <option value="" disabled selected hidden>Streaming Service</option>
                           <option value="netflix">Netflix</option>
                           <option value="disney">Disney+</option>
                           <option value="hulu">Hulu</option>
@@ -119,9 +114,9 @@
                           <option value="peacock">Peacock</option>
                           <option value="prime">Amazon Prime</option>
                         </select>
-                      </label>
-                    <label class="">Genre
+                    <label class="">Genre</label>
                       <select id="genre">
+                        <option value="" disabled selected hidden>Genre</option>
                         <option value="1">Biography</option>
                         <option value="2">Film Noir</option>
                         <option value="3">Game Show</option>
@@ -151,13 +146,12 @@
                         <option value="10764">Reality</option>
                         <option value="10767">Talk Show</option>
                       </select>
-                    </label>
-                    <label>Movie/TV
+                    <label>Movie/TV</label>
                       <select id="mediaType">
+                        <option value="" disabled selected hidden>Show Type</option>
                         <option value="series">TV Show</option>
                         <option value="movie">Movie</option>
                       </select>
-                    </label>
 
                     <button id="btn" class="cell">Search</button>
                 </div>       
