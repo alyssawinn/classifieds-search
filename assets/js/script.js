@@ -6,10 +6,11 @@ let getStreamingInfo = function(streamingService, mediaType, genreNumber) {
 fetch("https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=" + streamingService + "&type=" + mediaType + "&genre=" + genreNumber + "&page=1&language=en", {
 	"method": "GET",
 	"headers": {
-		"x-rapidapi-key": "27322ff4d2msheb5e58d7fc4eb03p11cb15jsnd5d27333e7d8",
+		"x-rapidapi-key": "8206f3a213msh8ed8c8207eb19f8p1aede3jsn056a50d4f77f",
 		"x-rapidapi-host": "streaming-availability.p.rapidapi.com"
 	}
 })
+  
 .then(function(responseStreaming){
 	if (responseStreaming.ok) {
 		responseStreaming.json().then(function(dataStreaming){
@@ -23,10 +24,26 @@ fetch("https://streaming-availability.p.rapidapi.com/search/basic?country=us&ser
 .catch(function(error){
   alert("Unable to connect to streaming availability services.")
 });
+console.log(streamingService)
+console.log(mediaType);
+console.log(genreNumber);
 };
 
+let streamingSubmitHandler = function() {
+  let serviceSelected = $("#streamingService").val();
+  let genreSelected = $("#genre").val();
+  let mediaTypeSelected = $("#mediaType").val();
 
+  getStreamingInfo(serviceSelected, mediaTypeSelected, genreSelected);
+};
 
+let streamingSubmitHandler2 = function() {
+  let serviceSelected2 = $("#streamingService2").val();
+  let genreSelected2 = $("#genre2").val();
+  let mediaTypeSelected2 = $("#mediaType2").val();
+
+  getStreamingInfo(serviceSelected2, mediaTypeSelected2, genreSelected2);
+}
 
 
 $("#btn").click(function () {
@@ -37,6 +54,7 @@ $("#btn").click(function () {
   console.log(inputValue);
   getRestaurantList();
   console.log(genre);
+  streamingSubmitHandler();
 });
 
 $("#btn2").click(function () {
@@ -45,6 +63,7 @@ $("#btn2").click(function () {
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search2").val("");
   console.log(inputValue);
+  streamingSubmitHandler2();
 });
 
 let searchAgain = recentSearches.map((r, i) => {
@@ -173,6 +192,4 @@ $(window).resize(function () {
     restaurantEl.classList.remove("small-6");
 }
   });
-
-getStreamingInfo("netflix", "movie", 35);
 
