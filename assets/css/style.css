@@ -109,6 +109,10 @@ button:hover {
     font-size: 18px;
 }
 
+.restaurant-row:nth-child(odd) {
+  background-color: var(--color3);
+}
+
 .button2 {
   padding: 8px;
   font-size: 25px;
