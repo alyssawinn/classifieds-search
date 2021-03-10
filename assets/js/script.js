@@ -6,7 +6,7 @@ let getStreamingInfo = function(streamingService, mediaType, genreNumber) {
 fetch("https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=" + streamingService + "&type=" + mediaType + "&genre=" + genreNumber + "&page=1&language=en", {
 	"method": "GET",
 	"headers": {
-		"x-rapidapi-key": "8206f3a213msh8ed8c8207eb19f8p1aede3jsn056a50d4f77f",
+		"x-rapidapi-key": "API_KEY_HERE",
 		"x-rapidapi-host": "streaming-availability.p.rapidapi.com"
 	}
 })
