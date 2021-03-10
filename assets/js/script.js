@@ -1,6 +1,26 @@
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 let streamingSelection = document.querySelector("#streamingService");
 var restaurantContainerEl = document.createElement("div");
+let ebayEl = document.querySelector("#ebayResults");
+let restaurantEl = document.querySelector("#restaurantResults");
+
+$("#btn").click(function () {
+  var zipCode = $("#zipcode").val();
+  recentSearches.unshift(zipCode);
+  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+  $("#search").val("");
+  console.log(zipCode);
+  getRestaurantList(zipCode);
+  console.log(genre);
+});
+
+$("#btn2").click(function () {
+  let zipCode = $("#search2").val();
+  recentSearches.unshift(zipCode);
+  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+  $("#search2").val("");
+  console.log(zipCode);
+});
 
 let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
   fetch(
@@ -33,17 +53,13 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
     });
 };
 
-let ebayEl = document.querySelector("#ebayResults");
-let restaurantEl = document.querySelector("#restaurantResults");
-
-var getRestaurantList = function () {
+var getRestaurantList = function(zipCode) {
   restaurantContainerEl.textContent = "";
-  fetch(
-    "https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/84095?page=1",
+  fetch("https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/" + zipCode + "?page=1",
     {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "APIKEY",
+        "x-rapidapi-key": "8206f3a213msh8ed8c8207eb19f8p1aede3jsn056a50d4f77f",
         "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
       },
     }
@@ -67,24 +83,6 @@ var createRestaurantList = function (restaurants) {
     restaurantContainerEl.appendChild(restaurantItem);
   }
 };
-
-$("#btn").click(function () {
-  let inputValue = $("#search").val();
-  recentSearches.unshift(inputValue);
-  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-  $("#search").val("");
-  console.log(inputValue);
-  getRestaurantList();
-  console.log(genre);
-});
-
-$("#btn2").click(function () {
-  let inputValue = $("#search2").val();
-  recentSearches.unshift(inputValue);
-  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-  $("#search2").val("");
-  console.log(inputValue);
-});
 
 let searchAgain = recentSearches.map((r, i) => {
   let isFiveSearches = i >= 5;
