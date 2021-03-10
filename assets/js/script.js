@@ -1,12 +1,14 @@
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 let streamingSelection = document.querySelector("#streamingService");
+let btn = document.querySelectorAll("#btn, #btn2");
 
+$(document).foundation();
 
 let getStreamingInfo = function(streamingService, mediaType, genreNumber) {
 fetch("https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=" + streamingService + "&type=" + mediaType + "&genre=" + genreNumber + "&page=1&language=en", {
 	"method": "GET",
 	"headers": {
-		"x-rapidapi-key": "27322ff4d2msheb5e58d7fc4eb03p11cb15jsnd5d27333e7d8",
+		"x-rapidapi-key": "8206f3a213msh8ed8c8207eb19f8p1aede3jsn056a50d4f77f",
 		"x-rapidapi-host": "streaming-availability.p.rapidapi.com"
 	}
 })
@@ -29,23 +31,26 @@ fetch("https://streaming-availability.p.rapidapi.com/search/basic?country=us&ser
 
 
 
-$("#btn").click(function () {
+$(btn).click(function () {
   let inputValue = $("#search").val();
   recentSearches.unshift(inputValue);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search").val("");
   console.log(inputValue);
-  getRestaurantList();
+  // getRestaurantList();
+  console.log($('#streamingService').val());
+  modal.style.display = "none";
+
   console.log(genre);
 });
 
-$("#btn2").click(function () {
-  let inputValue = $("#search2").val();
-  recentSearches.unshift(inputValue);
-  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-  $("#search2").val("");
-  console.log(inputValue);
-});
+// $("#btn2").click(function () {
+//   let inputValue = $("#search2").val();
+//   recentSearches.unshift(inputValue);
+//   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+//   $("#search2").val("");
+//   console.log(inputValue);
+// });
 
 let searchAgain = recentSearches.map((r, i) => {
   let isFiveSearches = i >= 5;
@@ -169,29 +174,30 @@ let createCard = function (streamingService) {
   }
 };
 
-let openWindow = function () {
-  let width = $(window).width();
-  if (width < 810) {
-    ebayEl.classList.add("small-6");
-    restaurantEl.classList.add("small-6");
-  } else {
-    ebayEl.classList.remove("small-6");
-    restaurantEl.classList.remove("small-6");
-}
-  
-}
-$(window).resize(function () {
-  if ($(window).width() < 810) {
-    ebayEl.classList.add("small-6");
-    restaurantEl.classList.add("small-6");
-  } else {
-    ebayEl.classList.remove("small-6");
-    restaurantEl.classList.remove("small-6");
-}
-  });
 
-openWindow();
+
+  // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var modalBtn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+modalBtn.onclick = function() {
+  modal.style.display = "block";
+}
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
   
-//getStreamingInfo("netflix", "movie", 35);
 
 
