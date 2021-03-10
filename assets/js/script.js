@@ -1,13 +1,3 @@
-var pullCraigslistApi = function () {
-  var apiUrl = "http://www.ksl.com/classifieds/api.php?cmd=ad&id=23027643";
-  fetch(apiUrl).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        console.log(data.type);
-      });
-    }
-  });
-};
 
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 
@@ -67,11 +57,11 @@ recentSearches.map((_, i) => {
 //  }
 //});
 
-let ebayEl = document.querySelector("#ebayResults");
+let watchEl = document.querySelector("#ebayResults");
 let amznEl = document.querySelector("#amznResults");
 
 $(window).resize(function () {
-  if ($(window).width() < 810) {
+  if ($(window).width() < 827) {
     ebayEl.classList.add("small-6");
     amznEl.classList.add("small-6");
   } else {

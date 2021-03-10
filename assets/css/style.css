@@ -95,6 +95,10 @@ button:hover {
     display: none;
   }
 
+  .bigscreen {
+    display: none;
+  }
+
   .smallscreen {
     display: flex;
     border-bottom: solid;
