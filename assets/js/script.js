@@ -87,18 +87,6 @@ recentSearches.map((_, i) => {
 //  }
 //});
 
-<<<<<<< HEAD
-let watchEl = document.querySelector("#ebayResults");
-let amznEl = document.querySelector("#amznResults");
-
-$(window).resize(function () {
-  if ($(window).width() < 827) {
-    ebayEl.classList.add("small-6");
-    amznEl.classList.add("small-6");
-  } else {
-    ebayEl.classList.remove("small-6");
-    amznEl.classList.remove("small-6");
-=======
 let ebayEl = document.querySelector("#ebayResults");
 let restaurantEl = document.querySelector("#restaurantResults");
 
@@ -127,7 +115,6 @@ var createRestaurantList = function(restaurants) {
     restaurantItem.textContent = restaurants.data[i].restaurant_name + " - " + restaurants.data[i].restaurant_phone;
     restaurantEl.appendChild(restaurantContainerEl);
     restaurantContainerEl.appendChild(restaurantItem);
->>>>>>> 7355e464f80aa514e9d3bf13b26f886ce083ab2f
   }
 };
 
@@ -151,8 +138,8 @@ let createCard = function (streamingService) {
   cardSection.classList.add("card-section");
   // create item service element
   let service = document.createElement("h4");
-  service.classList.add("service");
-  service.textContent = $("#streamingService option:selected").val().toUpperCase();
+  // service.classList.add("service");
+  // service.textContent = $("#streamingService option:selected").val().toUpperCase();
   // create item rating element
   let itemRating = document.createElement("p");
   itemRating.classList.add("item-info");
@@ -182,6 +169,17 @@ let createCard = function (streamingService) {
   }
 };
 
+let openWindow = function () {
+  let width = $(window).width();
+  if (width < 810) {
+    ebayEl.classList.add("small-6");
+    restaurantEl.classList.add("small-6");
+  } else {
+    ebayEl.classList.remove("small-6");
+    restaurantEl.classList.remove("small-6");
+}
+  
+}
 $(window).resize(function () {
   if ($(window).width() < 810) {
     ebayEl.classList.add("small-6");
@@ -192,5 +190,8 @@ $(window).resize(function () {
 }
   });
 
-getStreamingInfo("netflix", "movie", 35);
+openWindow();
+  
+//getStreamingInfo("netflix", "movie", 35);
+
 
