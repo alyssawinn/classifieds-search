@@ -70,10 +70,10 @@ var createRestaurantList = function (restaurants) {
 };
 
 $("#btn").click(function () {
-  let inputValue = $("#search").val();
+  let inputValue = $("#zipcode").val();
   recentSearches.unshift(inputValue);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-  $("#search").val("");
+  $("#zipcode").val("");
   console.log(inputValue);
   getRestaurantList();
   console.log(genre);
@@ -198,5 +198,3 @@ $(window).resize(function () {
     restaurantEl.classList.remove("small-6");
   }
 });
-
-getStreamingInfo("netflix", "movie", 35);
