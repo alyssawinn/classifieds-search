@@ -1,5 +1,6 @@
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 let streamingSelection = document.querySelector("#streamingService");
+var restaurantContainerEl = document.createElement("div");
 
 let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
   fetch(
@@ -36,34 +37,32 @@ let ebayEl = document.querySelector("#ebayResults");
 let restaurantEl = document.querySelector("#restaurantResults");
 
 var getRestaurantList = function () {
+  restaurantContainerEl.textContent = "";
   fetch(
     "https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/84095?page=1",
     {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "API_KEY_HERE",
+        "x-rapidapi-key": "APIKEY",
         "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
       },
     }
   ).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        console.log(data);
         createRestaurantList(data.result);
       });
     }
+  }).catch(function (error) {
+    alert("Unable to connect to list of local restaurants.");
   });
 };
 
 var createRestaurantList = function (restaurants) {
-  var restaurantContainerEl = document.createElement("div");
   for (var i = 0; i < restaurants.data.length; i++) {
     var restaurantItem = document.createElement("div");
     restaurantItem.classList = "restaurant-row";
-    restaurantItem.textContent =
-      restaurants.data[i].restaurant_name +
-      " - " +
-      restaurants.data[i].restaurant_phone;
+    restaurantItem.textContent = restaurants.data[i].restaurant_name + " - " + restaurants.data[i].restaurant_phone + " - " + restaurants.data[i].address.street;
     restaurantEl.appendChild(restaurantContainerEl);
     restaurantContainerEl.appendChild(restaurantItem);
   }
@@ -196,5 +195,3 @@ $(window).resize(function () {
     restaurantEl.classList.remove("small-6");
   }
 });
-
-getStreamingInfo("netflix", "movie", 35);
