@@ -1,6 +1,78 @@
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 let streamingSelection = document.querySelector("#streamingService");
+
+let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
+  fetch(
+    "https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=" +
+      streamingService +
+      "&type=" +
+      mediaType +
+      "&genre=" +
+      genreNumber +
+      "&page=1&language=en",
+    {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": "API_KEY_HERE",
+        "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
+      },
+    }
+  )
+    .then(function (responseStreaming) {
+      if (responseStreaming.ok) {
+        responseStreaming.json().then(function (dataStreaming) {
+          createCard(dataStreaming);
+        });
+      } else {
+        alert("Error: " + responseStreaming.statusText);
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to streaming availability services.");
+    });
+  console.log(streamingService);
+  console.log(mediaType);
+  console.log(genreNumber);
+};
+
+let streamingSubmitHandler = function () {
+  let serviceSelected = $("#streamingService").val();
+  let genreSelected = $("#genre").val();
+  let mediaTypeSelected = $("#mediaType").val();
+
+  getStreamingInfo(serviceSelected, mediaTypeSelected, genreSelected);
+};
+
+let streamingSubmitHandler2 = function () {
+  let serviceSelected2 = $("#streamingService2").val();
+  let genreSelected2 = $("#genre2").val();
+  let mediaTypeSelected2 = $("#mediaType2").val();
+
+  getStreamingInfo(serviceSelected2, mediaTypeSelected2, genreSelected2);
+};
+
 var restaurantContainerEl = document.createElement("div");
+let ebayEl = document.querySelector("#ebayResults");
+let restaurantEl = document.querySelector("#restaurantResults");
+
+$("#btn").click(function () {
+  var zipCode = $("#zipcode").val();
+  recentSearches.unshift(zipCode);
+  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+  $("#search").val("");
+  getRestaurantList(zipCode);
+  console.log(genre);
+  streamingSubmitHandler();
+});
+
+$("#btn2").click(function () {
+  let zipCode = $("#search2").val();
+  recentSearches.unshift(zipCode);
+  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+  $("#search2").val("");
+  console.log(inputValue);
+  streamingSubmitHandler2();
+});
 
 let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
   fetch(
@@ -33,17 +105,16 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
     });
 };
 
-let ebayEl = document.querySelector("#ebayResults");
-let restaurantEl = document.querySelector("#restaurantResults");
-
-var getRestaurantList = function () {
+var getRestaurantList = function (zipCode) {
   restaurantContainerEl.textContent = "";
   fetch(
-    "https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/84095?page=1",
+    "https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/" +
+      zipCode +
+      "?page=1",
     {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "APIKEY",
+        "x-rapidapi-key": "API_KEY",
         "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
       },
     }
@@ -94,6 +165,7 @@ $("#btn2").click(function () {
 });
 
 // recent items list for big screen
+
 let searchAgain = recentSearches.map((r, i) => {
   let isFiveSearches = i >= 5;
   if (isFiveSearches) {
@@ -177,12 +249,6 @@ let createCard = function (streamingService) {
     // create card section element
     let cardSection = document.createElement("div");
     cardSection.classList.add("card-section");
-    // create item service element
-    let service = document.createElement("h4");
-    service.classList.add("service");
-    service.textContent = $("#streamingService option:selected")
-      .val()
-      .toUpperCase();
     // create item rating element
     let itemRating = document.createElement("p");
     itemRating.classList.add("item-info");
@@ -210,7 +276,6 @@ let createCard = function (streamingService) {
     cardContainer.appendChild(cardDivider);
     cardContainer.appendChild(cardImage);
     cardContainer.appendChild(cardSection);
-    cardSection.appendChild(service);
     cardSection.appendChild(itemRating);
     cardSection.appendChild(itemRuntime);
     cardSection.appendChild(itemCast);
