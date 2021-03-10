@@ -9,7 +9,6 @@ $("#btn").click(function () {
   recentSearches.unshift(zipCode);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search").val("");
-  console.log(zipCode);
   getRestaurantList(zipCode);
   console.log(genre);
 });
@@ -59,7 +58,7 @@ var getRestaurantList = function(zipCode) {
     {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "8206f3a213msh8ed8c8207eb19f8p1aede3jsn056a50d4f77f",
+        "x-rapidapi-key": "API_KEY",
         "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
       },
     }
