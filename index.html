@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>eBay & Craigslist Classifieds Search</title>
+    <title>A Night In</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
@@ -17,7 +17,8 @@
     <header class="grid-x grid-padding-x">
       <h1>A Night In</h1>
     </header>
-        
+    
+    <!-- MOBILE/TABLET -->
     <section class="grid-x smallscreen">
         <div class="cell small-6 search">
             <div class="row columns ">
@@ -26,14 +27,13 @@
                 Enter in your zipcode for a list of restaurants near you and fill out the form below to get
                 movie/T.V recommendations for tonight.
               </p>
-              <label>Enter Zipcode
-                <input id="search" type="number" name="keyword" placeholder="zipcode">
-              </label>
-              
+              <label>Zipcode</label>
+                <input id="zipcode" type="text" name="zipcode" placeholder="Zip Code" />
             </div>
             <div>
-                <label class="">Streaming Service
+                <label class="">Streaming Service</label>
                   <select id="streamingService">
+                    <option value="" disabled selected hidden>Streaming Service</option>
                     <option value="netflix">Netflix</option>
                     <option value="disney">Disney+</option>
                     <option value="hulu">Hulu</option>
@@ -41,13 +41,13 @@
                     <option value="peacock">Peacock</option>
                     <option value="prime">Amazon Prime</option>
                   </select>
-                </label>
             </div>
         </div>
 
         <div class="cell small-6 search">
-          <label class="">Genre
+          <label class="">Genre</label>
             <select id="genre">
+              <option value="" disabled selected hidden>Genre</option>
               <option value="1">Biography</option>
               <option value="2">Film Noir</option>
               <option value="3">Game Show</option>
@@ -77,19 +77,19 @@
               <option value="10764">Reality</option>
               <option value="10767">Talk Show</option>
             </select>
-          </label>
-          <label>Movie/TV
+          <label>Movie/TV</label>
             <select id="mediaType">
+              <option value="" disabled selected hidden>Show Type</option>
               <option value="series">TV Show</option>
               <option value="movie">Movie</option>
             </select>
-          </label>
         </div>    
         <div class="smallbutton">
           <button id="btn" class="button2 cell">Search</button>
        </div>   
     </section>
 
+    <!-- DESKTOP -->
     <main>
         <div class="grid-x">    
             <div class="cell small-2 search bigscreen">
@@ -99,10 +99,10 @@
                       Enter in your zipcode for a list of restaurants near you and fill out the form below to get
                       movie/T.V recommendations for tonight.
                     </p>
-                    <label>Enter Zipcode
-                      <input id="search" type="number" name="keyword" placeholder="zipcode">
-                    </label>
+                    <label>Enter Zipcode</label>
+                      <input id="zipcode" type="text" name="keyword" placeholder="Zip Code">
                     
+<<<<<<< HEAD
                   </div>
                   <div  class="bigscreen">
                     <h5>Favorited Items</h3>
@@ -110,10 +110,13 @@
                     <h4>Search</h4>
                     <h6>Recent Searches</h6>
                     <select name="" id="searchedItems" aria-placeholder="Search"></select>
+=======
+>>>>>>> 36b5f4e6d2f372490b574de5bf55f66e83a47363
                   </div>       
                   <div class="bigscreen">
-                      <label class="">Streaming Service
+                      <label class="">Streaming Service</label>
                         <select id="streamingService">
+                          <option value="" disabled selected hidden>Streaming Service</option>
                           <option value="netflix">Netflix</option>
                           <option value="disney">Disney+</option>
                           <option value="hulu">Hulu</option>
@@ -121,9 +124,9 @@
                           <option value="peacock">Peacock</option>
                           <option value="prime">Amazon Prime</option>
                         </select>
-                      </label>
-                    <label class="">Genre
+                    <label class="">Genre</label>
                       <select id="genre">
+                        <option value="" disabled selected hidden>Genre</option>
                         <option value="1">Biography</option>
                         <option value="2">Film Noir</option>
                         <option value="3">Game Show</option>
@@ -153,13 +156,12 @@
                         <option value="10764">Reality</option>
                         <option value="10767">Talk Show</option>
                       </select>
-                    </label>
-                    <label>Movie/TV
+                    <label>Movie/TV</label>
                       <select id="mediaType">
+                        <option value="" disabled selected hidden>Show Type</option>
                         <option value="series">TV Show</option>
                         <option value="movie">Movie</option>
                       </select>
-                    </label>
 
                     <button id="btn" class="cell">Search</button>
                 </div>       
@@ -169,29 +171,13 @@
                 <h4 class="color3">What to Watch</h4>
             </div>
 
-            <div id="amznResults" class="cell small-5 large-expand results">
+            <div id="restaurantResults" class="cell small-5 large-expand results">
                 <h4 class="color3">Where to Eat</h4>
             </div>
-
-
             
         </div>
       </div>
     </main>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
-      crossorigin="anonymous"
-    ></script>
-    <script src="./assets/js/script.js"></script>
-  </body>
-</html>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
