@@ -86,13 +86,14 @@ $("#btn").click(function () {
 });
 
 $("#btn2").click(function () {
-  let inputValue = $("#search2").val();
+  let inputValue = $("#zipcode2").val();
   recentSearches.unshift(inputValue);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-  $("#search2").val("");
+  $("#zipcode2").val("");
   console.log(inputValue);
 });
 
+// recent items list for big screen
 let searchAgain = recentSearches.map((r, i) => {
   let isFiveSearches = i >= 5;
   if (isFiveSearches) {
@@ -101,7 +102,6 @@ let searchAgain = recentSearches.map((r, i) => {
     return `
       <option id="option-${i}" >${r}</option> 
     `;
-    //change option id to something else.
   }
 });
 $("#searchedItems").html(searchAgain);
@@ -109,7 +109,32 @@ $("#searchedItems").html(searchAgain);
 recentSearches.map((_, i) => {
   $(`#option-${i}`)
     .off()
-    .click(() => {});
+    .click(() => {
+      $("searchedItems").value;
+      console.log(recentSearches);
+    });
+});
+
+// recent items list for mobile
+let searchAgain2 = recentSearches.map((r, i) => {
+  let isFiveSearches = i >= 5;
+  if (isFiveSearches) {
+    return "";
+  } else {
+    return `
+      <option id="option-${i}" >${r}</option> 
+    `;
+  }
+});
+$("#searchedItems2").html(searchAgain2);
+
+recentSearches.map((_, i) => {
+  $(`#option-${i}`)
+    .off()
+    .click(() => {
+      $("searchedItems2").value;
+      console.log(recentSearches);
+    });
 });
 
 //let myFavorites = [
