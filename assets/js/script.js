@@ -47,22 +47,29 @@ var getRestaurantList = function () {
         "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
       },
     }
-  ).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        createRestaurantList(data.result);
-      });
-    }
-  }).catch(function (error) {
-    alert("Unable to connect to list of local restaurants.");
-  });
+  )
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          createRestaurantList(data.result);
+        });
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to list of local restaurants.");
+    });
 };
 
 var createRestaurantList = function (restaurants) {
   for (var i = 0; i < restaurants.data.length; i++) {
     var restaurantItem = document.createElement("div");
     restaurantItem.classList = "restaurant-row";
-    restaurantItem.textContent = restaurants.data[i].restaurant_name + " - " + restaurants.data[i].restaurant_phone + " - " + restaurants.data[i].address.street;
+    restaurantItem.textContent =
+      restaurants.data[i].restaurant_name +
+      " - " +
+      restaurants.data[i].restaurant_phone +
+      " - " +
+      restaurants.data[i].address.street;
     restaurantEl.appendChild(restaurantContainerEl);
     restaurantContainerEl.appendChild(restaurantItem);
   }
@@ -102,9 +109,7 @@ $("#searchedItems").html(searchAgain);
 recentSearches.map((_, i) => {
   $(`#option-${i}`)
     .off()
-    .click(() => {
-      // make api call
-    });
+    .click(() => {});
 });
 
 //let myFavorites = [
