@@ -136,10 +136,6 @@ let createCard = function (streamingService) {
   // create card section element
   let cardSection = document.createElement("div");
   cardSection.classList.add("card-section");
-  // create item service element
-  let service = document.createElement("h4");
-  service.classList.add("service");
-  service.textContent = $("#streamingService option:selected").val().toUpperCase();
   // create item rating element
   let itemRating = document.createElement("p");
   itemRating.classList.add("item-info");
@@ -161,7 +157,6 @@ let createCard = function (streamingService) {
   cardContainer.appendChild(cardDivider);
   cardContainer.appendChild(cardImage);
   cardContainer.appendChild(cardSection);
-  cardSection.appendChild(service);
   cardSection.appendChild(itemRating);
   cardSection.appendChild(itemRuntime);
   cardSection.appendChild(itemCast);
