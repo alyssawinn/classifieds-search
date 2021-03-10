@@ -103,7 +103,9 @@ $("#searchedItems").html(searchAgain);
 recentSearches.map((_, i) => {
   $(`#option-${i}`)
     .off()
-    .click(() => {});
+    .click(() => {
+      // make api call
+    });
 });
 
 //let myFavorites = [
