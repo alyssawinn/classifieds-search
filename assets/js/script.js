@@ -1,21 +1,41 @@
-var pullCraigslistApi = function () {
-  var apiUrl = "http://www.ksl.com/classifieds/api.php?cmd=ad&id=23027643";
-  fetch(apiUrl).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        console.log(data.type);
-      });
-    }
-  });
+let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
+let streamingSelection = document.querySelector("#streamingService");
+
+
+let getStreamingInfo = function(streamingService, mediaType, genreNumber) {
+fetch("https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=" + streamingService + "&type=" + mediaType + "&genre=" + genreNumber + "&page=1&language=en", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "27322ff4d2msheb5e58d7fc4eb03p11cb15jsnd5d27333e7d8",
+		"x-rapidapi-host": "streaming-availability.p.rapidapi.com"
+	}
+})
+.then(function(responseStreaming){
+	if (responseStreaming.ok) {
+		responseStreaming.json().then(function(dataStreaming){
+      createCard(dataStreaming);
+		})
+	}
+  else {
+    alert("Error: " + responseStreaming.statusText);
+  }
+})
+.catch(function(error){
+  alert("Unable to connect to streaming availability services.")
+});
 };
 
-let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
+
+
+
 
 $("#btn").click(function () {
   let inputValue = $("#search").val();
   recentSearches.unshift(inputValue);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search").val("");
+  console.log(inputValue);
+  getRestaurantList();
   console.log(genre);
 });
 
@@ -68,19 +88,39 @@ recentSearches.map((_, i) => {
 //});
 
 let ebayEl = document.querySelector("#ebayResults");
-let amznEl = document.querySelector("#amznResults");
+let restaurantEl = document.querySelector("#restaurantResults");
 
-$(window).resize(function () {
-  if ($(window).width() < 810) {
-    ebayEl.classList.add("small-6");
-    amznEl.classList.add("small-6");
-  } else {
-    ebayEl.classList.remove("small-6");
-    amznEl.classList.remove("small-6");
+var getRestaurantList = function() {
+  fetch("https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/84095?page=1", {
+    "method": "GET",
+	  "headers": {
+		  "x-rapidapi-key": "API_KEY_HERE",
+		  "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com"
+	  }
+  }).then(function(response) {
+    if(response.ok) {
+      response.json().then(function(data) {
+        console.log(data);
+        createRestaurantList(data.result);
+      })
+    }
+  })
+};
+
+var createRestaurantList = function(restaurants) {
+  var restaurantContainerEl = document.createElement("div");
+  for (var i = 0; i < restaurants.data.length; i++) {
+    var restaurantItem = document.createElement("div");
+    restaurantItem.classList = "restaurant-row";
+    restaurantItem.textContent = restaurants.data[i].restaurant_name + " - " + restaurants.data[i].restaurant_phone;
+    restaurantEl.appendChild(restaurantContainerEl);
+    restaurantContainerEl.appendChild(restaurantItem);
   }
-});
+};
 
-let createCard = function () {
+let createCard = function (streamingService) {
+  console.log(streamingService);
+  for (let i = 0; i < streamingService.results.length; i++) {
   // create card container element
   let cardContainer = document.createElement("div");
   cardContainer.classList.add("card");
@@ -88,30 +128,56 @@ let createCard = function () {
   // create card divider element
   let cardDivider = document.createElement("div");
   cardDivider.classList.add("card-divider");
-  cardDivider.textContent = "Item Name";
+  cardDivider.textContent = streamingService.results[i].title;
   // create img element
   let cardImage = document.createElement("img");
   cardImage.classList.add("item-img");
-  cardImage.setAttribute("src", "assets/images/demo-img.webp");
+  cardImage.setAttribute("src", streamingService.results[i].backdropURLs.original);
   // create card section element
   let cardSection = document.createElement("div");
   cardSection.classList.add("card-section");
-  // create item price element
-  let itemPrice = document.createElement("h4");
-  itemPrice.classList.add("item-price");
-  itemPrice.textContent = "$1000.00";
-  // create item description element
-  let itemDescription = document.createElement("p");
-  itemDescription.classList.add("item-description");
-  itemDescription.textContent =
-    "This is where we will add the description text. I wonder how it will look if the description is super long.";
+  // create item service element
+  let service = document.createElement("h4");
+  service.classList.add("service");
+  service.textContent = $("#streamingService option:selected").val().toUpperCase();
+  // create item rating element
+  let itemRating = document.createElement("p");
+  itemRating.classList.add("item-info");
+  itemRating.textContent ="Rating: Ages " + streamingService.results[i].age + " or older";
+  // create item runtime element
+  let itemRuntime = document.createElement("p");
+  itemRuntime.classList.add("item-info");
+  itemRuntime.textContent ="Runtime: " + streamingService.results[i].runtime + " mins.";
+  // create item cast element
+  let itemCast = document.createElement("p");
+  itemCast.classList.add("item-info");
+  itemCast.textContent ="Starring: " + streamingService.results[i].cast[0] + ", " + streamingService.results[i].cast[1];
+  // create item year element
+  let itemYear = document.createElement("p");
+  itemYear.classList.add("item-info");
+  itemYear.textContent ="Year: " + streamingService.results[i].year;
   // appending it all
   ebayEl.appendChild(cardContainer);
   cardContainer.appendChild(cardDivider);
   cardContainer.appendChild(cardImage);
   cardContainer.appendChild(cardSection);
-  cardSection.appendChild(itemPrice);
-  cardSection.appendChild(itemDescription);
+  cardSection.appendChild(service);
+  cardSection.appendChild(itemRating);
+  cardSection.appendChild(itemRuntime);
+  cardSection.appendChild(itemCast);
+  cardSection.appendChild(itemYear);
+  }
 };
 
-createCard();
+$(window).resize(function () {
+  if ($(window).width() < 810) {
+    ebayEl.classList.add("small-6");
+    restaurantEl.classList.add("small-6");
+  } else {
+    ebayEl.classList.remove("small-6");
+    restaurantEl.classList.remove("small-6");
+}
+  });
+
+getStreamingInfo("netflix", "movie", 35);
+
