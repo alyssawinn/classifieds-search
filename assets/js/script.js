@@ -6,10 +6,11 @@ let getStreamingInfo = function(streamingService, mediaType, genreNumber) {
 fetch("https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=" + streamingService + "&type=" + mediaType + "&genre=" + genreNumber + "&page=1&language=en", {
 	"method": "GET",
 	"headers": {
-		"x-rapidapi-key": "27322ff4d2msheb5e58d7fc4eb03p11cb15jsnd5d27333e7d8",
+		"x-rapidapi-key": "API_KEY_HERE",
 		"x-rapidapi-host": "streaming-availability.p.rapidapi.com"
 	}
 })
+  
 .then(function(responseStreaming){
 	if (responseStreaming.ok) {
 		responseStreaming.json().then(function(dataStreaming){
@@ -23,29 +24,111 @@ fetch("https://streaming-availability.p.rapidapi.com/search/basic?country=us&ser
 .catch(function(error){
   alert("Unable to connect to streaming availability services.")
 });
+console.log(streamingService)
+console.log(mediaType);
+console.log(genreNumber);
 };
 
+let streamingSubmitHandler = function() {
+  let serviceSelected = $("#streamingService").val();
+  let genreSelected = $("#genre").val();
+  let mediaTypeSelected = $("#mediaType").val();
 
+  getStreamingInfo(serviceSelected, mediaTypeSelected, genreSelected);
+};
 
+let streamingSubmitHandler2 = function() {
+  let serviceSelected2 = $("#streamingService2").val();
+  let genreSelected2 = $("#genre2").val();
+  let mediaTypeSelected2 = $("#mediaType2").val();
 
+  getStreamingInfo(serviceSelected2, mediaTypeSelected2, genreSelected2);
+}
+
+var restaurantContainerEl = document.createElement("div");
+let ebayEl = document.querySelector("#ebayResults");
+let restaurantEl = document.querySelector("#restaurantResults");
 
 $("#btn").click(function () {
-  let inputValue = $("#search").val();
-  recentSearches.unshift(inputValue);
+  var zipCode = $("#zipcode").val();
+  recentSearches.unshift(zipCode);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search").val("");
-  console.log(inputValue);
-  getRestaurantList();
+  getRestaurantList(zipCode);
   console.log(genre);
+  streamingSubmitHandler();
 });
 
 $("#btn2").click(function () {
-  let inputValue = $("#search2").val();
-  recentSearches.unshift(inputValue);
+  let zipCode = $("#search2").val();
+  recentSearches.unshift(zipCode);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   $("#search2").val("");
   console.log(inputValue);
+  streamingSubmitHandler2();
 });
+
+let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
+  fetch(
+    "https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=" +
+      streamingService +
+      "&type=" +
+      mediaType +
+      "&genre=" +
+      genreNumber +
+      "&page=1&language=en",
+    {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": "27322ff4d2msheb5e58d7fc4eb03p11cb15jsnd5d27333e7d8",
+        "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
+      },
+    }
+  )
+    .then(function (responseStreaming) {
+      if (responseStreaming.ok) {
+        responseStreaming.json().then(function (dataStreaming) {
+          createCard(dataStreaming);
+        });
+      } else {
+        alert("Error: " + responseStreaming.statusText);
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to streaming availability services.");
+    });
+};
+
+var getRestaurantList = function(zipCode) {
+  restaurantContainerEl.textContent = "";
+  fetch("https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/" + zipCode + "?page=1",
+    {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": "API_KEY",
+        "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
+      },
+    }
+  ).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (data) {
+        createRestaurantList(data.result);
+      });
+    }
+  }).catch(function (error) {
+    alert("Unable to connect to list of local restaurants.");
+  });
+};
+
+var createRestaurantList = function (restaurants) {
+  for (var i = 0; i < restaurants.data.length; i++) {
+    var restaurantItem = document.createElement("div");
+    restaurantItem.classList = "restaurant-row";
+    restaurantItem.textContent = restaurants.data[i].restaurant_name + " - " + restaurants.data[i].restaurant_phone + " - " + restaurants.data[i].address.street;
+    restaurantEl.appendChild(restaurantContainerEl);
+    restaurantContainerEl.appendChild(restaurantItem);
+  }
+};
 
 let searchAgain = recentSearches.map((r, i) => {
   let isFiveSearches = i >= 5;
@@ -63,9 +146,7 @@ $("#searchedItems").html(searchAgain);
 recentSearches.map((_, i) => {
   $(`#option-${i}`)
     .off()
-    .click(() => {
-      // make api call
-    });
+    .click(() => {});
 });
 
 //let myFavorites = [
@@ -87,37 +168,6 @@ recentSearches.map((_, i) => {
 //  }
 //});
 
-let ebayEl = document.querySelector("#ebayResults");
-let restaurantEl = document.querySelector("#restaurantResults");
-
-var getRestaurantList = function() {
-  fetch("https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/84095?page=1", {
-    "method": "GET",
-	  "headers": {
-		  "x-rapidapi-key": "API_KEY_HERE",
-		  "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com"
-	  }
-  }).then(function(response) {
-    if(response.ok) {
-      response.json().then(function(data) {
-        console.log(data);
-        createRestaurantList(data.result);
-      })
-    }
-  })
-};
-
-var createRestaurantList = function(restaurants) {
-  var restaurantContainerEl = document.createElement("div");
-  for (var i = 0; i < restaurants.data.length; i++) {
-    var restaurantItem = document.createElement("div");
-    restaurantItem.classList = "restaurant-row";
-    restaurantItem.textContent = restaurants.data[i].restaurant_name + " - " + restaurants.data[i].restaurant_phone;
-    restaurantEl.appendChild(restaurantContainerEl);
-    restaurantContainerEl.appendChild(restaurantItem);
-  }
-};
-
 let createCard = function (streamingService) {
   console.log(streamingService);
   for (let i = 0; i < streamingService.results.length; i++) {
@@ -136,10 +186,6 @@ let createCard = function (streamingService) {
   // create card section element
   let cardSection = document.createElement("div");
   cardSection.classList.add("card-section");
-  // create item service element
-  let service = document.createElement("h4");
-  service.classList.add("service");
-  service.textContent = $("#streamingService option:selected").val().toUpperCase();
   // create item rating element
   let itemRating = document.createElement("p");
   itemRating.classList.add("item-info");
@@ -161,7 +207,6 @@ let createCard = function (streamingService) {
   cardContainer.appendChild(cardDivider);
   cardContainer.appendChild(cardImage);
   cardContainer.appendChild(cardSection);
-  cardSection.appendChild(service);
   cardSection.appendChild(itemRating);
   cardSection.appendChild(itemRuntime);
   cardSection.appendChild(itemCast);
@@ -178,6 +223,4 @@ $(window).resize(function () {
     restaurantEl.classList.remove("small-6");
 }
   });
-
-getStreamingInfo("netflix", "movie", 35);
 
