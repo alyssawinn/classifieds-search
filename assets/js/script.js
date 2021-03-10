@@ -1,6 +1,9 @@
 let recentSearches = JSON.parse(localStorage.getItem("recentSearches")) ?? [];
 let streamingSelection = document.querySelector("#streamingService");
 let btn = document.querySelectorAll("#btn, #btn2");
+var restaurantContainerEl = document.createElement("div");
+let mediaContainer = document.querySelector("#mediaResults");
+let restaurantEl = document.querySelector("#restaurantResults");
 
 let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
   fetch(
@@ -36,25 +39,12 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
   console.log(genreNumber);
 };
 
-let streamingSubmitHandler = function () {
+let streamingSubmitHandler = function() {
   let serviceSelected = $("#streamingService").val();
   let genreSelected = $("#genre").val();
   let mediaTypeSelected = $("#mediaType").val();
-
   getStreamingInfo(serviceSelected, mediaTypeSelected, genreSelected);
 };
-
-let streamingSubmitHandler2 = function () {
-  let serviceSelected2 = $("#streamingService2").val();
-  let genreSelected2 = $("#genre2").val();
-  let mediaTypeSelected2 = $("#mediaType2").val();
-
-  getStreamingInfo(serviceSelected2, mediaTypeSelected2, genreSelected2);
-};
-
-var restaurantContainerEl = document.createElement("div");
-let ebayEl = document.querySelector("#ebayResults");
-let restaurantEl = document.querySelector("#restaurantResults");
 
 $("#btn").click(function () {
   var zipCode = $("#zipcode").val();
@@ -63,42 +53,11 @@ $("#btn").click(function () {
   $("#search").val("");
   getRestaurantList(zipCode);
   console.log(genre);
+  mediaContainer.innerHTML = "";
   streamingSubmitHandler();
   modal.style.display = "none";
 });
 
-
-
-// let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
-//   fetch(
-//     "https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=" +
-//       streamingService +
-//       "&type=" +
-//       mediaType +
-//       "&genre=" +
-//       genreNumber +
-//       "&page=1&language=en",
-//     {
-//       method: "GET",
-//       headers: {
-//         "x-rapidapi-key": "27322ff4d2msheb5e58d7fc4eb03p11cb15jsnd5d27333e7d8",
-//         "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
-//       },
-//     }
-//   )
-//     .then(function (responseStreaming) {
-//       if (responseStreaming.ok) {
-//         responseStreaming.json().then(function (dataStreaming) {
-//           createCard(dataStreaming);
-//         });
-//       } else {
-//         alert("Error: " + responseStreaming.statusText);
-//       }
-//     })
-//     .catch(function (error) {
-//       alert("Unable to connect to streaming availability services.");
-//     });
-// };
 
 var getRestaurantList = function (zipCode) {
   restaurantContainerEl.textContent = "";
@@ -141,18 +100,18 @@ var createRestaurantList = function (restaurants) {
   }
 };
 
-$("#btn").click(function () {
-  let inputValue = $("#zipcode").val();
-  recentSearches.unshift(inputValue);
-  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-  $("#zipcode").val("");
-  console.log(inputValue);
-  // getRestaurantList();
-  console.log($('#streamingService').val());
-  modal.style.display = "none";
+// $("#btn").click(function () {
+//   let inputValue = $("#zipcode").val();
+//   recentSearches.unshift(inputValue);
+//   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+//   $("#zipcode").val("");
+//   console.log(inputValue);
+//   // getRestaurantList();
+//   console.log($('#streamingService').val());
+//   modal.style.display = "none";
 
-  console.log(genre);
-});
+//   console.log(genre);
+// });
 
 // recent items list for big screen
 
@@ -235,7 +194,11 @@ let createCard = function (streamingService) {
     cardImage.setAttribute(
       "src",
       streamingService.results[i].backdropURLs.original
-    );
+    )
+    if (cardImage.getAttribute("src") === null) {
+      cardImage.setAttribute("src",
+      "https://www.shutterstock.com/image-vector/film-icon-606906164")
+    };
     // create card section element
     let cardSection = document.createElement("div");
     cardSection.classList.add("card-section");
@@ -262,7 +225,7 @@ let createCard = function (streamingService) {
     itemYear.classList.add("item-info");
     itemYear.textContent = "Year: " + streamingService.results[i].year;
     // appending it all
-    ebayEl.appendChild(cardContainer);
+    mediaContainer.appendChild(cardContainer);
     cardContainer.appendChild(cardDivider);
     cardContainer.appendChild(cardImage);
     cardContainer.appendChild(cardSection);
@@ -270,7 +233,12 @@ let createCard = function (streamingService) {
     cardSection.appendChild(itemRuntime);
     cardSection.appendChild(itemCast);
     cardSection.appendChild(itemYear);
+
+    $("#mediaResults").on("click", ".card", function(){
+      
+    })
   }
+ 
 };
 
   // Get the modal
