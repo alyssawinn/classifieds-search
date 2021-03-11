@@ -12,30 +12,32 @@
       crossorigin="anonymous"
     />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Fascinate&family=Roboto:wght@400;700&family=Ubuntu:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fascinate&family=Roboto:wght@400;700&family=Ubuntu:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
-    <header class="grid-x grid-padding-x">
+    <header class="grid-x grid-padding-x stars">
       <h1>A Night In</h1>
     </header>
     
 
 <!-- Trigger/Open The Modal -->
 <div class="modalOpen">
-  <button id="myBtn" class="cell">Start Planning Your Night In</button>
+  <button id="myBtn" class="cell myBtn">Start Planning Your Night In</button>
 </div>
 <!-- The Modal -->
 
 </div>
 <div id="myModal" class="modal">
-<div class="cell search ">
-  <div class="row columns ">
+<div class="cell search grid-x grid-padding-x">
+    <section class="instruction">
       <p id="instruction">Help us plan your Night In!
         <br>
         Enter in your zipcode for a list of restaurants near you and fill out the form below to get
         movie/T.V recommendations for tonight.
       </p>
+    </section>
+    <section class="small-6">
       <label>Enter Zipcode</label>
         <input id="zipcode" type="text" name="keyword" placeholder="Zip Code">
       <div>
@@ -53,6 +55,10 @@
             <option value="peacock">Peacock</option>
             <option value="prime">Prime Video</option>
           </select>
+    </section>
+
+    <section class="small-6">
+
       <label class="">Genre</label>
         <select id="genre">
           <option value="" disabled selected hidden>Genre</option>
@@ -91,12 +97,11 @@
           <option value="series">TV Show</option>
           <option value="movie">Movie</option>
         </select>
+    </section> 
+        <button id="btn" class="cell myBtn">Search</button>
+  </div>
+</div>
 
-      <button id="btn" class="cell">Search</button>
-  </div>       
-</div>
-</div>
-    <!-- DESKTOP -->
     <main>
         <div class="grid-x">    
 

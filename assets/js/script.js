@@ -14,7 +14,7 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
     {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "8206f3a213msh8ed8c8207eb19f8p1aede3jsn056a50d4f77f",
+        "x-rapidapi-key": "Key-Goes-Here",
         "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
       },
     }
@@ -57,9 +57,11 @@ $("#btn").click(function () {
   var zipCode = $("#zipcode").val();
   recentSearches.unshift(zipCode);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-  $("#search").val("");
+  $("#zipcode").val("");
   getRestaurantList(zipCode);
   streamingSubmitHandler();
+  console.log($("#streamingService").val());
+
   modal.style.display = "none";
   recentSearchToSearchAgain();
 });
