@@ -23,24 +23,26 @@
 
 <!-- Trigger/Open The Modal -->
 <div class="modalOpen">
-  <button id="myBtn" class="cell">Start Planning Your Night In</button>
+  <button id="myBtn" class="cell myBtn">Start Planning Your Night In</button>
 </div>
 <!-- The Modal -->
 
 </div>
 <div id="myModal" class="modal">
-<div class="cell search ">
-  <div class="row columns ">
+<div class="cell search grid-x grid-padding-x">
+    <section class="instruction">
       <p id="instruction">Help us plan your Night In!
         <br>
         Enter in your zipcode for a list of restaurants near you and fill out the form below to get
         movie/T.V recommendations for tonight.
       </p>
+    </section>
+    <section class="small-6">
       <label>Enter Zipcode</label>
         <input id="zipcode" type="text" name="keyword" placeholder="Zip Code">
       
-    </div>       
-    <div class="">
+         
+    
         <label class="">Streaming Service</label>
           <select id="streamingService">
             <option value="" disabled selected hidden>Streaming Service</option>
@@ -51,6 +53,10 @@
             <option value="peacock">Peacock</option>
             <option value="prime">Prime Video</option>
           </select>
+    </section>
+
+    <section class="small-6">
+
       <label class="">Genre</label>
         <select id="genre">
           <option value="" disabled selected hidden>Genre</option>
@@ -89,10 +95,9 @@
           <option value="series">TV Show</option>
           <option value="movie">Movie</option>
         </select>
-
-      <button id="btn" class="cell">Search</button>
-  </div>       
-</div>
+    </section> 
+        <button id="btn" class="cell myBtn">Search</button>
+  </div>
 </div>
     <!-- DESKTOP -->
     <main>
