@@ -14,7 +14,7 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
     {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "8206f3a213msh8ed8c8207eb19f8p1aede3jsn056a50d4f77f",
+        "x-rapidapi-key": "Key-Goes-Here",
         "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
       },
     }
@@ -31,9 +31,6 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
     .catch(function (error) {
       alert("Unable to connect to streaming availability services.");
     });
-  console.log(streamingService);
-  console.log(mediaType);
-  console.log(genreNumber);
 };
 
 let streamingSubmitHandler = function () {
@@ -60,14 +57,14 @@ $("#btn").click(function () {
   var zipCode = $("#zipcode").val();
   recentSearches.unshift(zipCode);
   localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-  $("#search").val("");
+  $("#zipcode").val("");
   getRestaurantList(zipCode);
-  console.log(genre);
   streamingSubmitHandler();
+  console.log($("#streamingService").val());
+
   modal.style.display = "none";
+  recentSearchToSearchAgain();
 });
-
-
 
 // let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
 //   fetch(
@@ -155,64 +152,27 @@ var createRestaurantList = function (restaurants) {
   }
 };
 
-$("#btn").click(function () {
-  let inputValue = $("#zipcode").val();
-  recentSearches.unshift(inputValue);
-  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-  $("#zipcode").val("");
-  console.log(inputValue);
-  // getRestaurantList();
-  console.log($('#streamingService').val());
-  modal.style.display = "none";
+let recentSearchToSearchAgain = function () {
+  let searchAgain = recentSearches.map((r, i) => {
+    let isFiveSearches = i >= 5;
+    if (isFiveSearches) {
+      return "";
+    } else {
+      return `
+        <option id="option-${i}" value="${r}" >${r}</option> 
+      `;
+    }
+  });
+  $("#searchedItems").html(searchAgain);
 
-  console.log(genre);
-});
-
-// recent items list for big screen
-
-let searchAgain = recentSearches.map((r, i) => {
-  let isFiveSearches = i >= 5;
-  if (isFiveSearches) {
-    return "";
-  } else {
-    return `
-      <option id="option-${i}" >${r}</option> 
-    `;
-  }
-});
-$("#searchedItems").html(searchAgain);
-
-recentSearches.map((_, i) => {
-  $(`#option-${i}`)
+  $("#searchedItems")
     .off()
-    .click(() => {
-      $("searchedItems").value;
-      console.log(recentSearches);
+    .change((e) => {
+      let value = $(e.currentTarget).val();
+      $("#zipcode").val(value);
     });
-});
-
-// recent items list for mobile
-let searchAgain2 = recentSearches.map((r, i) => {
-  let isFiveSearches = i >= 5;
-  if (isFiveSearches) {
-    return "";
-  } else {
-    return `
-      <option id="option-${i}" >${r}</option> 
-    `;
-  }
-});
-$("#searchedItems2").html(searchAgain2);
-
-recentSearches.map((_, i) => {
-  $(`#option-${i}`)
-    .off()
-    .click(() => {
-      $("searchedItems2").value;
-      console.log(recentSearches);
-    });
-});
-
+};
+recentSearchToSearchAgain();
 //let myFavorites = [
 // {
 // favorited: true,
@@ -287,25 +247,23 @@ let createCard = function (streamingService) {
   }
 };
 
-  // Get the modal
-  var modal = document.getElementById("myModal");
+// Get the modal
+var modal = document.getElementById("myModal");
 
-  // Get the button that opens the modal
-  var modalBtn = document.getElementById("myBtn");
-  
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-  
-  // When the user clicks on the button, open the modal
-  modalBtn.onclick = function() {
-    modal.style.display = "block";
+// Get the button that opens the modal
+var modalBtn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+modalBtn.onclick = function () {
+  modal.style.display = "block";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
   }
-  
-  
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-  
+};
