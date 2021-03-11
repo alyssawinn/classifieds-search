@@ -90,6 +90,7 @@ button:hover {
   font-size: 20px;
   font-weight: bold;
   text-align: center;
+  border-bottom: solid var(--color1) 3px ;
   
 }
 

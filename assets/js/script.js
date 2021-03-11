@@ -4,6 +4,7 @@ let btn = document.querySelectorAll("#btn, #btn2");
 var restaurantContainerEl = document.createElement("div");
 let mediaContainer = document.querySelector("#mediaResults");
 let restaurantEl = document.querySelector("#restaurantResults");
+let mediaResultsContainer = document.createElement("div");
 
 let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
   fetch(
@@ -53,7 +54,7 @@ $("#btn").click(function () {
   $("#search").val("");
   getRestaurantList(zipCode);
   console.log(genre);
-  mediaContainer.innerHTML = "";
+  mediaResultsContainer.innerHTML = "";
   streamingSubmitHandler();
   modal.style.display = "none";
 });
@@ -180,6 +181,27 @@ recentSearches.map((_, i) => {
 let createCard = function (streamingService) {
   console.log(streamingService);
   for (let i = 0; i < streamingService.results.length; i++) {
+    // create link for card
+    let serviceSelected = $("#streamingService").val();
+    let cardLink = document.createElement("a");
+    if(serviceSelected == "netflix") {
+      cardLink.href = streamingService.results[i].streamingInfo.netflix.us.link;
+    }
+    else if(serviceSelected == "disney") {
+      cardLink.href = streamingService.results[i].streamingInfo.disney.us.link;
+    }
+    else if(serviceSelected == "hulu") {
+      cardLink.href = streamingService.results[i].streamingInfo.hulu.us.link;
+    }
+    else if(serviceSelected == "hbo") {
+      cardLink.href = streamingService.results[i].streamingInfo.hbo.us.link;
+    }
+    else if(serviceSelected == "peacock") {
+      cardLink.href = streamingService.results[i].streamingInfo.peacock.us.link;
+    }
+    else if(serviceSelected == "prime") {
+      cardLink.href = streamingService.results[i].streamingInfo.prime.us.link;
+    };
     // create card container element
     let cardContainer = document.createElement("div");
     cardContainer.classList.add("card");
@@ -194,11 +216,7 @@ let createCard = function (streamingService) {
     cardImage.setAttribute(
       "src",
       streamingService.results[i].backdropURLs.original
-    )
-    if (cardImage.getAttribute("src") === null) {
-      cardImage.setAttribute("src",
-      "https://www.shutterstock.com/image-vector/film-icon-606906164")
-    };
+    );
     // create card section element
     let cardSection = document.createElement("div");
     cardSection.classList.add("card-section");
@@ -225,7 +243,9 @@ let createCard = function (streamingService) {
     itemYear.classList.add("item-info");
     itemYear.textContent = "Year: " + streamingService.results[i].year;
     // appending it all
-    mediaContainer.appendChild(cardContainer);
+    mediaContainer.appendChild(mediaResultsContainer);
+    mediaResultsContainer.appendChild(cardLink);
+    cardLink.appendChild(cardContainer);
     cardContainer.appendChild(cardDivider);
     cardContainer.appendChild(cardImage);
     cardContainer.appendChild(cardSection);
@@ -233,11 +253,7 @@ let createCard = function (streamingService) {
     cardSection.appendChild(itemRuntime);
     cardSection.appendChild(itemCast);
     cardSection.appendChild(itemYear);
-
-    $("#mediaResults").on("click", ".card", function(){
-      
-    })
-  }
+    }
  
 };
 
