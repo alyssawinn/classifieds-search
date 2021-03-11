@@ -90,7 +90,11 @@ button:hover {
   border: 1px solid var(--color1);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   margin: 15px;
+ border-radius:10px;
+}
 
+.card:hover {
+  cursor: pointer;
 }
 
 .card-divider {
@@ -99,6 +103,8 @@ button:hover {
   font-size: 20px;
   font-weight: bold;
   text-align: center;
+  border-bottom: solid var(--color1) 3px ;
+  
 }
 
 .card-section {
