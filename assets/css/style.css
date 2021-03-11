@@ -22,17 +22,11 @@ section {
   padding: 3px;
 }
 
-label {
-  font-size: 18px;
-  font-family: 'Ubuntu', sans-serif;
-}
-
-#instruction {
+#instruction, label {
   font-weight: bold;
   font-size: 16px;
   font-family: 'Ubuntu', sans-serif;
   text-align: center;
- 
 }
 
 h4 {
@@ -57,6 +51,13 @@ h4 {
 
 label {
   display: none;
+}
+
+#myModal > div > div > label {
+  display: block;
+  text-decoration: underline;
+  font-weight: normal;
+  color: white;
 }
 
 .instruction {
