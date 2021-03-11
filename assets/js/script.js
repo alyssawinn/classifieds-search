@@ -109,7 +109,7 @@ var getRestaurantList = function (zipCode) {
     {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "API_KEY",
+        "x-rapidapi-key": "8206f3a213msh8ed8c8207eb19f8p1aede3jsn056a50d4f77f",
         "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
       },
     }
@@ -117,7 +117,16 @@ var getRestaurantList = function (zipCode) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          createRestaurantList(data.result);
+          if (data.result.numResults === 0) {
+            /* var errorModal = document.createElement("div");
+            errorModal.className = "error-modal";
+            errorModal.textContent = "test";
+            modal.appendChild(errorModal); */
+            alert("Please enter a valid zip code.");
+            modal.style.display = "block";
+          } else {
+            createRestaurantList(data.result);
+          }
         });
       }
     })
@@ -128,16 +137,21 @@ var getRestaurantList = function (zipCode) {
 
 var createRestaurantList = function (restaurants) {
   for (var i = 0; i < restaurants.data.length; i++) {
+    var restaurantItemLink = document.createElement("a");
+    restaurantItemLink.style.display = "block";
+    restaurantItemLink.className = "restaurant-row";
+    restaurantItemLink.href = "https://maps.google.com/?q=" + restaurants.data[i].address.formatted;
+    restaurantItemLink.target = "_blank";
     var restaurantItem = document.createElement("div");
-    restaurantItem.classList = "restaurant-row";
     restaurantItem.textContent =
       restaurants.data[i].restaurant_name +
       " - " +
       restaurants.data[i].restaurant_phone +
       " - " +
       restaurants.data[i].address.street;
+    restaurantItemLink.appendChild(restaurantItem);
     restaurantEl.appendChild(restaurantContainerEl);
-    restaurantContainerEl.appendChild(restaurantItem);
+    restaurantContainerEl.appendChild(restaurantItemLink);
   }
 };
 
