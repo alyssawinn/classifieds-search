@@ -5,6 +5,7 @@ var restaurantContainerEl = document.createElement("div");
 let mediaContainer = document.querySelector("#mediaResults");
 let restaurantEl = document.querySelector("#restaurantResults");
 let mediaResultsContainer = document.createElement("div");
+mediaResultsContainer.classList = " media-results-container cell grid-x large-expand";
 
 let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
   fetch(
@@ -18,7 +19,7 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
     {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "API_Key_Here",
+        "x-rapidapi-key": "27322ff4d2msheb5e58d7fc4eb03p11cb15jsnd5d27333e7d8",
         "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
       },
     }
@@ -210,6 +211,7 @@ let createCard = function (streamingService) {
     // create link for card
     let serviceSelected = $("#streamingService").val();
     let cardLink = document.createElement("a");
+  
     if(serviceSelected == "netflix") {
       cardLink.href = streamingService.results[i].streamingInfo.netflix.us.link;
     }
@@ -228,6 +230,7 @@ let createCard = function (streamingService) {
     else if(serviceSelected == "prime") {
       cardLink.href = streamingService.results[i].streamingInfo.prime.us.link;
     };
+    cardLink.target = "_blank";
     // create card container element
     let cardContainer = document.createElement("div");
     cardContainer.classList.add("card");

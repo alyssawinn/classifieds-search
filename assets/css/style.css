@@ -82,8 +82,9 @@ button:hover {
   cursor: pointer;
 }
 
-.title {
-  width: 100%;
+.media-results-container {
+  display: flex;
+  justify-content: center;
 }
 
 .card {
