@@ -120,6 +120,10 @@ button:hover {
   border: 1px solid var(--color1);
 }
 
+.item-img {
+  height: 111.2px;
+}
+
 .item-info {
   font-size: 13px;
   font-weight: bold;

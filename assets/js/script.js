@@ -19,7 +19,7 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
     {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "API-Key-Here",
+        "x-rapidapi-key": "API_KEY_HERE",
         "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
       },
     }
@@ -27,9 +27,17 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
     .then(function (responseStreaming) {
       if (responseStreaming.ok) {
         responseStreaming.json().then(function (dataStreaming) {
-          createCard(dataStreaming);
+          if (dataStreaming.results.length === 0) {
+            // CHANGE THIS TO MODAL!
+            alert("Your search yielded no results!")
+          }
+          else {
+            createCard(dataStreaming);
+          }
+          
         });
       } else {
+        // CHANGE THIS TO MODAL!
         alert("Error: " + responseStreaming.statusText);
       }
     })
@@ -44,14 +52,6 @@ let streamingSubmitHandler = function () {
   let mediaTypeSelected = $("#mediaType").val();
 
   getStreamingInfo(serviceSelected, mediaTypeSelected, genreSelected);
-};
-
-let streamingSubmitHandler2 = function () {
-  let serviceSelected2 = $("#streamingService2").val();
-  let genreSelected2 = $("#genre2").val();
-  let mediaTypeSelected2 = $("#mediaType2").val();
-
-  getStreamingInfo(serviceSelected2, mediaTypeSelected2, genreSelected2);
 };
 
 $("#btn").click(function () {
@@ -143,26 +143,9 @@ let recentSearchToSearchAgain = function () {
     });
 };
 recentSearchToSearchAgain();
-//let myFavorites = [
-// {
-// favorited: true,
-// name: "",
-//},
-//{
-// favorited: false,
-//  name: "",
-//  },
-//];
-
-//myFavorites.map((favorite, i) => {
-// if (favorite.favorited) {
-//  return `
-//  <option></option>
-//  `;
-//  }
-//});
 
 let createCard = function (streamingService) {
+  console.log(streamingService);
   for (let i = 0; i < streamingService.results.length; i++) {
     // create link for card
     let serviceSelected = $("#streamingService").val();
@@ -202,6 +185,10 @@ let createCard = function (streamingService) {
       "src",
       streamingService.results[i].backdropURLs.original
     );
+    // check if search result has a card image
+    if (cardImage.getAttribute("src") == "undefined") {
+      cardImage.setAttribute("src", "./assets/images/clapboard.png");
+    }
     // create card section element
     let cardSection = document.createElement("div");
     cardSection.classList.add("card-section");
@@ -210,11 +197,19 @@ let createCard = function (streamingService) {
     itemRating.classList.add("item-info");
     itemRating.textContent =
       "Rating: Ages " + streamingService.results[i].age + " or older";
+      // check if rating exists
+      if(itemRating.textContent == "Rating: Ages undefined or older") {
+        itemRating.textContent = "Rating: N/A"
+      };
     // create item runtime element
     let itemRuntime = document.createElement("p");
     itemRuntime.classList.add("item-info");
     itemRuntime.textContent =
       "Runtime: " + streamingService.results[i].runtime + " mins.";
+      // check if runtime exists
+      if (itemRuntime.textContent == "Runtime: undefined mins.") {
+        itemRuntime.textContent = "Runtime: N/A"
+      };
     // create item cast element
     let itemCast = document.createElement("p");
     itemCast.classList.add("item-info");
@@ -223,10 +218,24 @@ let createCard = function (streamingService) {
       streamingService.results[i].cast[0] +
       ", " +
       streamingService.results[i].cast[1];
+      // check if cast exists
+      if (itemCast.textContent == "Starring: undefined, undefined") {
+        itemCast.textContent = "Starring: N/A"
+      }
+      else if (itemCast.textContent ==
+        "Starring: " +
+        streamingService.results[i].cast[0] +
+        ", undefined") {
+          itemCast.textContent= "Starring: " + streamingService.results[i].cast[0];
+        }
     // create item year element
     let itemYear = document.createElement("p");
     itemYear.classList.add("item-info");
     itemYear.textContent = "Year: " + streamingService.results[i].year;
+    // check if year exists
+    if(itemYear.textContent == "Year: undefined") {
+      itemYear.textContent = "Year: N/A"
+    }
     // appending it all
     mediaContainer.appendChild(mediaResultsContainer);
     mediaResultsContainer.appendChild(cardLink);
