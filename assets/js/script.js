@@ -54,10 +54,6 @@ let streamingSubmitHandler2 = function () {
   getStreamingInfo(serviceSelected2, mediaTypeSelected2, genreSelected2);
 };
 
-var restaurantContainerEl = document.createElement("div");
-let ebayEl = document.querySelector("#ebayResults");
-let restaurantEl = document.querySelector("#restaurantResults");
-
 $("#btn").click(function () {
   var zipCode = $("#zipcode").val();
   recentSearches.unshift(zipCode);
@@ -233,7 +229,9 @@ let createCard = function (streamingService) {
     itemYear.classList.add("item-info");
     itemYear.textContent = "Year: " + streamingService.results[i].year;
     // appending it all
-    ebayEl.appendChild(cardContainer);
+    mediaContainer.appendChild(mediaResultsContainer);
+    mediaResultsContainer.appendChild(cardLink);
+    cardLink.appendChild(cardContainer);
     cardContainer.appendChild(cardDivider);
     cardContainer.appendChild(cardImage);
     cardContainer.appendChild(cardSection);
