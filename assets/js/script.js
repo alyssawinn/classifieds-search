@@ -19,7 +19,7 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
     {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "API_KEY_HERE",
+        "x-rapidapi-key": "api_key",
         "x-rapidapi-host": "streaming-availability.p.rapidapi.com",
       },
     }
@@ -28,8 +28,9 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
       if (responseStreaming.ok) {
         responseStreaming.json().then(function (dataStreaming) {
           if (dataStreaming.results.length === 0) {
-            // CHANGE THIS TO MODAL!
-            alert("Your search yielded no results!")
+            errorText.textContent = "Your streaming search yielded no results!";
+            modal.style.display = "block";
+            errorModal.style.display ="block";
           }
           else {
             createCard(dataStreaming);
@@ -37,12 +38,15 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
           
         });
       } else {
-        // CHANGE THIS TO MODAL!
-        alert("Error: " + responseStreaming.statusText);
+        errorText.textContent = "Error: " + responseStreaming.statusText;
+        modal.style.display = "block";
+        errorModal.style.display ="block";
       }
     })
     .catch(function (error) {
-      alert("Unable to connect to streaming availability services.");
+      errorText.textContent = "Unable to connect to streaming availability services";
+      modal.style.display = "block";
+      errorModal.style.display ="block";
     });
 };
 
@@ -76,7 +80,7 @@ var getRestaurantList = function (zipCode) {
     {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "API-Key-Here",
+        "x-rapidapi-key": "api_key",
         "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
       },
     }
@@ -85,12 +89,9 @@ var getRestaurantList = function (zipCode) {
       if (response.ok) {
         response.json().then(function (data) {
           if (data.result.numResults === 0) {
-            /* var errorModal = document.createElement("div");
-            errorModal.className = "error-modal";
-            errorModal.textContent = "test";
-            modal.appendChild(errorModal); */
-            alert("Please enter a valid zip code.");
+            errorText.textContent = "Please enter a valid zip code";
             modal.style.display = "block";
+            errorModal.style.display ="block";
           } else {
             createRestaurantList(data.result);
           }
@@ -98,7 +99,9 @@ var getRestaurantList = function (zipCode) {
       }
     })
     .catch(function (error) {
-      alert("Unable to connect to list of local restaurants.");
+      errorText.textContent = "Unable to connect to list of local restaurants";
+      modal.style.display = "block";
+      errorModal.style.display ="block";
     });
 };
 
@@ -252,6 +255,13 @@ let createCard = function (streamingService) {
 
 // Get the modal
 var modal = document.getElementById("myModal");
+var errorModal = document.getElementById("errorModal");
+var errorText = document.getElementById("errorText");
+var errorCloseBtn = document.createElement("button");
+errorCloseBtn.classList = "error-modal-btn";
+var errorCloseBtnText = document.createTextNode("Close");
+errorCloseBtn.appendChild(errorCloseBtnText);
+errorModal.appendChild(errorCloseBtn);
 
 // Get the button that opens the modal
 var modalBtn = document.getElementById("myBtn");
@@ -264,9 +274,15 @@ modalBtn.onclick = function () {
   modal.style.display = "block";
 };
 
+errorCloseBtn.onclick = function() {
+  errorModal.style.display = "none";
+  errorText.textContent = "";
+}
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    errorModal.style.display = "none";
   }
 };
