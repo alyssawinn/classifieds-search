@@ -38,7 +38,7 @@ let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
           
         });
       } else {
-        errorText.textContent = "Error: " + responseStreaming.statusText;
+        errorText.textContent = "Error: Please make a selection in all search options and try again.";
         modal.style.display = "block";
         errorModal.style.display ="block";
       }
