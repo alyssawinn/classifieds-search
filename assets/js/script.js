@@ -5,8 +5,21 @@ var restaurantContainerEl = document.createElement("div");
 let mediaContainer = document.querySelector("#mediaResults");
 let restaurantEl = document.querySelector("#restaurantResults");
 let mediaResultsContainer = document.createElement("div");
-mediaResultsContainer.classList = " media-results-container cell grid-x large-expand";
+mediaResultsContainer.classList = "media-results-container cell grid-x large-expand";
 
+//MODALS
+var modal = document.getElementById("myModal");
+var errorModal = document.getElementById("errorModal");
+var errorText = document.getElementById("errorText");
+var errorCloseBtn = document.createElement("button");
+errorCloseBtn.classList = "error-modal-btn";
+var errorCloseBtnText = document.createTextNode("Close");
+errorCloseBtn.appendChild(errorCloseBtnText);
+errorModal.appendChild(errorCloseBtn);
+var modalBtn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+
+//STREAMING API
 let getStreamingInfo = function (streamingService, mediaType, genreNumber) {
   fetch(
     "https://streaming-availability.p.rapidapi.com/search/basic?country=us&service=" +
@@ -57,95 +70,6 @@ let streamingSubmitHandler = function () {
 
   getStreamingInfo(serviceSelected, mediaTypeSelected, genreSelected);
 };
-
-$("#btn").click(function () {
-  var zipCode = $("#zipcode").val();
-  recentSearches.unshift(zipCode);
-  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-  $("#zipcode").val("");
-  getRestaurantList(zipCode);
-  mediaResultsContainer.innerHTML = "";
-  streamingSubmitHandler();
-
-  modal.style.display = "none";
-  recentSearchToSearchAgain();
-});
-
-var getRestaurantList = function (zipCode) {
-  restaurantContainerEl.textContent = "";
-  fetch(
-    "https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/" +
-      zipCode +
-      "?page=1",
-    {
-      method: "GET",
-      headers: {
-        "x-rapidapi-key": "api_key",
-        "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
-      },
-    }
-  )
-    .then(function (response) {
-      if (response.ok) {
-        response.json().then(function (data) {
-          if (data.result.numResults === 0) {
-            errorText.textContent = "Please enter a valid zip code";
-            modal.style.display = "block";
-            errorModal.style.display ="block";
-          } else {
-            createRestaurantList(data.result);
-          }
-        });
-      }
-    })
-    .catch(function (error) {
-      errorText.textContent = "Unable to connect to list of local restaurants";
-      modal.style.display = "block";
-      errorModal.style.display ="block";
-    });
-};
-
-var createRestaurantList = function (restaurants) {
-  for (var i = 0; i < restaurants.data.length; i++) {
-    var restaurantItemLink = document.createElement("a");
-    restaurantItemLink.style.display = "block";
-    restaurantItemLink.className = "restaurant-row";
-    restaurantItemLink.href = "https://maps.google.com/?q=" + restaurants.data[i].address.formatted;
-    restaurantItemLink.target = "_blank";
-    var restaurantItem = document.createElement("div");
-    restaurantItem.textContent =
-      restaurants.data[i].restaurant_name +
-      " - " +
-      restaurants.data[i].restaurant_phone +
-      " - " +
-      restaurants.data[i].address.street;
-    restaurantItemLink.appendChild(restaurantItem);
-    restaurantEl.appendChild(restaurantContainerEl);
-    restaurantContainerEl.appendChild(restaurantItemLink);
-  }
-};
-
-let recentSearchToSearchAgain = function () {
-  let searchAgain = recentSearches.map((r, i) => {
-    let isFiveSearches = i >= 5;
-    if (isFiveSearches) {
-      return "";
-    } else {
-      return `
-        <option id="option-${i}" value="${r}" >${r}</option> 
-      `;
-    }
-  });
-  $("#searchedItems").html(searchAgain);
-
-  $("#searchedItems")
-    .off()
-    .change((e) => {
-      let value = $(e.currentTarget).val();
-      $("#zipcode").val(value);
-    });
-};
-recentSearchToSearchAgain();
 
 let createCard = function (streamingService) {
   console.log(streamingService);
@@ -253,23 +177,96 @@ let createCard = function (streamingService) {
   }
 };
 
-// Get the modal
-var modal = document.getElementById("myModal");
-var errorModal = document.getElementById("errorModal");
-var errorText = document.getElementById("errorText");
-var errorCloseBtn = document.createElement("button");
-errorCloseBtn.classList = "error-modal-btn";
-var errorCloseBtnText = document.createTextNode("Close");
-errorCloseBtn.appendChild(errorCloseBtnText);
-errorModal.appendChild(errorCloseBtn);
+//RESTAURANT API
+var getRestaurantList = function (zipCode) {
+  restaurantContainerEl.textContent = "";
+  fetch(
+    "https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/" +
+      zipCode +
+      "?page=1",
+    {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": "api_key",
+        "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
+      },
+    }
+  )
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          if (data.result.numResults === 0) {
+            errorText.textContent = "Please enter a valid zip code";
+            modal.style.display = "block";
+            errorModal.style.display ="block";
+          } else {
+            createRestaurantList(data.result);
+          }
+        });
+      }
+    })
+    .catch(function (error) {
+      errorText.textContent = "Unable to connect to list of local restaurants";
+      modal.style.display = "block";
+      errorModal.style.display ="block";
+    });
+};
 
-// Get the button that opens the modal
-var modalBtn = document.getElementById("myBtn");
+var createRestaurantList = function (restaurants) {
+  for (var i = 0; i < restaurants.data.length; i++) {
+    var restaurantItemLink = document.createElement("a");
+    restaurantItemLink.style.display = "block";
+    restaurantItemLink.className = "restaurant-row";
+    restaurantItemLink.href = "https://maps.google.com/?q=" + restaurants.data[i].address.formatted;
+    restaurantItemLink.target = "_blank";
+    var restaurantItem = document.createElement("div");
+    restaurantItem.textContent =
+      restaurants.data[i].restaurant_name +
+      " - " +
+      restaurants.data[i].restaurant_phone +
+      " - " +
+      restaurants.data[i].address.street;
+    restaurantItemLink.appendChild(restaurantItem);
+    restaurantEl.appendChild(restaurantContainerEl);
+    restaurantContainerEl.appendChild(restaurantItemLink);
+  }
+};
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+//RECENT SEARCHES
+let recentSearchToSearchAgain = function () {
+  let searchAgain = recentSearches.map((r, i) => {
+    let isFiveSearches = i >= 5;
+    if (isFiveSearches) {
+      return "";
+    } else {
+      return `
+        <option id="option-${i}" value="${r}" >${r}</option> 
+      `;
+    }
+  });
+  $("#searchedItems").html(searchAgain);
 
-// When the user clicks on the button, open the modal
+  $("#searchedItems")
+    .off()
+    .change((e) => {
+      let value = $(e.currentTarget).val();
+      $("#zipcode").val(value);
+    });
+};
+
+$("#btn").click(function () {
+  var zipCode = $("#zipcode").val();
+  recentSearches.unshift(zipCode);
+  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+  $("#zipcode").val("");
+  getRestaurantList(zipCode);
+  mediaResultsContainer.innerHTML = "";
+  streamingSubmitHandler();
+
+  modal.style.display = "none";
+  recentSearchToSearchAgain();
+});
+
 modalBtn.onclick = function () {
   modal.style.display = "block";
 };
@@ -279,10 +276,11 @@ errorCloseBtn.onclick = function() {
   errorText.textContent = "";
 }
 
-// When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
     errorModal.style.display = "none";
   }
 };
+
+recentSearchToSearchAgain();

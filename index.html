@@ -5,45 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>A Night In</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-      integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
-      crossorigin="anonymous"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Fascinate&family=Roboto:wght@400;700&family=Ubuntu:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Fascinate&family=Roboto:wght@400;700&family=Ubuntu:ital,wght@0,400;1,500&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link href="https://fonts.googleapis.com/css2?family=Fascinate&family=Roboto:wght@400;700&family=Ubuntu:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Fascinate&family=Roboto:wght@400;700&family=Ubuntu:ital,wght@0,500;1,500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
   </head>
   <body>
     <header class="grid-x grid-padding-x stars">
       <h1>A Night In</h1>
     </header>
-    
 
-<!-- Trigger/Open The Modal -->
-<div class="modalOpen">
-  <button id="myBtn" class="myBtn cell">Click Here To Start Planning Your Night In</button>
-</div>
-<!-- The Modal -->
+    <!-- MODALS START -->
+    <div class="modalOpen">
+      <button id="myBtn" class="myBtn cell">Click Here To Start Planning Your Night In</button>
+    </div>
 
-</div>
-<div id="myModal" class="modal">
-<div class="cell search grid-x grid-padding-x">
-    <section class="instruction">
-      <p id="instruction">Help us plan your Night In!
-        <br>
-        Enter in your zipcode for a list of restaurants near you and fill out the form below to get
-        movie/T.V recommendations for tonight.
-      </p>
-    </section>
-    <section class="small-6">
-      <label>Enter Zipcode</label>
-        <input id="zipcode" type="text" name="keyword" placeholder="Zip Code">         
-    <div class="">
-        <label class="">Streaming Service</label>
+    <div id="myModal" class="modal">
+      <div class="cell search grid-x grid-padding-x">
+        <section class="instruction">
+          <p id="instruction">Help us plan your Night In!
+            <br>
+            Enter your zip code for a list of restaurants near you and fill out the form below to get
+            movie/TV recommendations for tonight.
+          </p>
+        </section>
+
+        <section class="small-6">
+          <label>Enter Zipcode</label>
+          <input id="zipcode" type="text" name="keyword" placeholder="Zip Code">
+          <label class="">Streaming Service</label>
           <select id="streamingService">
             <option value="" disabled selected hidden>Streaming Service</option>
             <option value="netflix">Netflix</option>
@@ -53,93 +45,77 @@
             <option value="peacock">Peacock</option>
             <option value="prime">Prime Video</option>
           </select>
-    </section>
+        </section>
+        
+        <section class="small-6">
+          <label class="">Genre</label>
+          <select id="genre">
+            <option value="" disabled selected hidden>Genre</option>
+            <option value="1">Biography</option>
+            <option value="2">Film Noir</option>
+            <option value="3">Game Show</option>
+            <option value="4">Musical</option>
+            <option value="5">Sport</option>
+            <option value="6">Short</option>
+            <option value="7">Adult</option>
+            <option value="12">Adventure</option>
+            <option value="14">Fantasy</option>
+            <option value="16">Animation</option>
+            <option value="18">Drama</option>
+            <option value="27">Horror</option>
+            <option value="28">Action</option>
+            <option value="35">Comedy</option>
+            <option value="36">History</option>
+            <option value="37">Western</option>
+            <option value="53">Thriller</option>
+            <option value="80">Crime</option>
+            <option value="99">Documentary</option>
+            <option value="878">Science Fiction</option>
+            <option value="9648">Mystery</option>
+            <option value="10402">Music</option>
+            <option value="10749">Romance</option>
+            <option value="10751">Family</option>
+            <option value="10752">War</option>
+            <option value="10763">News</option>
+            <option value="10764">Reality</option>
+            <option value="10767">Talk Show</option>
+          </select>
+          <label>Movie/TV</label>
+          <select id="mediaType">
+            <option value="" disabled selected hidden>Show Type</option>
+            <option value="series">TV Show</option>
+            <option value="movie">Movie</option>
+          </select>
+        </section>
 
-    <section class="small-6">
-
-      <label class="">Genre</label>
-        <select id="genre">
-          <option value="" disabled selected hidden>Genre</option>
-          <option value="1">Biography</option>
-          <option value="2">Film Noir</option>
-          <option value="3">Game Show</option>
-          <option value="4">Musical</option>
-          <option value="5">Sport</option>
-          <option value="6">Short</option>
-          <option value="7">Adult</option>
-          <option value="12">Adventure</option>
-          <option value="14">Fantasy</option>
-          <option value="16">Animation</option>
-          <option value="18">Drama</option>
-          <option value="27">Horror</option>
-          <option value="28">Action</option>
-          <option value="35">Comedy</option>
-          <option value="36">History</option>
-          <option value="37">Western</option>
-          <option value="53">Thriller</option>
-          <option value="80">Crime</option>
-          <option value="99">Documentary</option>
-          <option value="878">Science Fiction</option>
-          <option value="9648">Mystery</option>
-          <option value="10402">Music</option>
-          <option value="10749">Romance</option>
-          <option value="10751">Family</option>
-          <option value="10752">War</option>
-          <option value="10763">News</option>
-          <option value="10764">Reality</option>
-          <option value="10767">Talk Show</option>
-        </select>
-      <label>Movie/TV</label>
-        <select id="mediaType">
-          <option value="" disabled selected hidden>Show Type</option>
-          <option value="series">TV Show</option>
-          <option value="movie">Movie</option>
-        </select>
-    </section>
-    <div>
-      <label>Recent Searches</label>
-      <select id="searchedItems"></select>
-    </div>
+        <div>
+          <label>Recent Searches</label>
+          <select id="searchedItems"></select>
+        </div>
         <button id="btn" class="cell myBtn">Search</button>
-        <!--error modal-->
+        
         <div id="errorModal" class="modal error-modal">
           <p class="error-text" id="errorText"></p>
         </div>
-  </div>
-</div>
+      </div>
+    </div>
+    <!-- MODALS END -->
 
     <main>
-        <div class="grid-x">    
-
-            <div id="mediaResults" class="cell small-6 large-expand results">
-              <div class="title">
-                <h4 class="color3">What to Watch <span class="fas fa-film"></span></h4>
-              </div>
-
-              </div>
-
-            <div id="restaurantResults" class="cell small-6 large-expand results">
-                <h4 class="color3">Where to Eat <span class="fas fa-pizza-slice"></span></h4>
-                
-            </div>
-            
+      <div class="grid-x">
+        <div id="mediaResults" class="cell small-6 large-expand results">
+          <div class="title">
+            <h4 class="color3">What to Watch <span class="fas fa-film"></span></h4>
+          </div>
         </div>
-      
+        <div id="restaurantResults" class="cell small-6 large-expand results">
+          <h4 class="color3">Where to Eat <span class="fas fa-pizza-slice"></span></h4>
+        </div>
+      </div>
     </main>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
   </body>
-</html>
-
-</body>
 </html>
