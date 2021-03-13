@@ -11,22 +11,9 @@ header {
   border-bottom: solid black;
 }
 
-
-
 h1 {
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
-}
-
-section {
-  padding: 3px;
-}
-
-#instruction, label {
-  font-weight: bold;
-  font-size: 16px;
-  font-family: 'Ubuntu', sans-serif;
-  text-align: center;
 }
 
 h4 {
@@ -37,36 +24,12 @@ h4 {
   text-align: center;
 }
 
-.search {
-  background-color: var(--color3);
-  padding: 10px;
-  border-right: solid 1px;
-
-}
-
-.results {
-  border-right: solid 1px;
-  min-height: 100vh;
+section {
+  padding: 3px;
 }
 
 label {
   display: none;
-}
-
-#myModal > div > div > label {
-  display: block;
-  text-decoration: underline;
-  font-weight: normal;
-  color: white;
-}
-
-.instruction {
-  display: flex;
-  margin: auto;
-}
-
-#instruction {
-  font-size: 20px;
 }
 
 button {
@@ -81,6 +44,41 @@ button {
 button:hover {
   background-color: rgb(255, 0, 0);
   cursor: pointer;
+}
+
+#instruction, label {
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+}
+
+.instruction {
+  display: flex;
+  margin: auto;
+}
+
+#instruction {
+  font-size: 20px;
+}
+
+.search {
+  background-color: var(--color3);
+  padding: 10px;
+  border-right: solid 1px;
+
+}
+
+.results {
+  border-right: solid 1px;
+  min-height: 100vh;
+}
+
+#myModal > div > div > label {
+  display: block;
+  text-decoration: underline;
+  font-weight: normal;
+  color: white;
 }
 
 .media-results-container {
@@ -120,6 +118,10 @@ button:hover {
   border: 1px solid var(--color1);
 }
 
+.item-img {
+  height: 111.2px;
+}
+
 .item-info {
   font-size: 13px;
   font-weight: bold;
@@ -127,25 +129,14 @@ button:hover {
   color: white;
 }
 
-.smallscreen {
-  display: none;
-  background-color: var(--color3);
-}
-.smallbutton {
-  justify-content: center;
-  display: flex;
-  width: 50%;
-  margin: auto;
-}
-
 .restaurant-row {
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgb(0 0 0 / 40%);
-    margin: 10px;
-    background-color: var(--color2);
-    padding: 10px;
-    color: white;
-    font-size: 18px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 40%);
+  margin: 10px;
+  background-color: var(--color2);
+  padding: 10px;
+  color: white;
+  font-size: 18px;
 }
 
 .restaurant-row:nth-child(odd) {
@@ -162,11 +153,6 @@ button:hover {
   text-decoration: none;
 }
 
-.button2 {
-  padding: 8px;
-  font-size: 25px;
-}
-
 .modalOpen {
   display: flex;
   justify-content: center;
@@ -179,27 +165,24 @@ button:hover {
   margin: auto;
 }
 
-/* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
 }
 
-/* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 80%;
 }
 
 .error-modal {
@@ -208,9 +191,24 @@ button:hover {
   width: 50%;
   height: 100px;
   z-index: 2;
+  background-color: #c5c2c2;
+  border: 3px solid #000;
 }
 
-/* The Close Button */
+.error-text {
+  color: #000;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.error-modal-btn {
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 .close {
   color: #aaa;
   float: right;
@@ -227,21 +225,19 @@ button:hover {
 
 .stars {
   background-color: var(--color1);
-
   background-image:url("https://64.media.tumblr.com/tumblr_lzvjakQDzV1qhvdofo4_250.png");
+}
 
+@media screen and (max-width: 1050px) {
+  .error-text, .error-modal-btn {
+    margin-bottom: 3px;
+  }
 }
 
 @media screen and (max-width: 827px) {
- 
-
   .search {
     text-align: center;
     border-right: none;
-  }
-
-  .smallbutton {
-    margin-bottom: 20px;
   }
 
   h1 {
@@ -259,12 +255,19 @@ button:hover {
 }
 
 @media screen and (max-width: 500px) {
-
   #myBtn {
     font-size: 13px;
   }
 
   #instruction {
     font-size: 17px;
+  }
+
+  .error-modal-btn {
+    font-size: 9px;
+  }
+
+  .restaurant-row {
+    font-size: 13px;
   }
 }
